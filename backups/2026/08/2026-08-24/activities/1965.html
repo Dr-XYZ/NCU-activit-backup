@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745236"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1782900153" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138642" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610760" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440156" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138642" />	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099845"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+					</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+	<div class="container">
+		<img src="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery/showImage/pp9-e4aLqqZ3np-ctNDh" class="mx-auto d-block" style="max-height:800px; max-width:100%;" />
+		<hr />
+	</div>
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">AI 實作工作坊【Microsoft × NCU 未來世代數位培力計畫】</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">教務處課務組</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">蔡宛螢</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">candytsai@cc.ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>教職員：</label>
+													<span>【全部教職員】</span>
+							
+					</div>
+									<div>
+						<label>學生：</label>
+													<span>【全部學生】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p class="PDq2pG_selectionAnchorContainer" data-start="131" data-end="247">🚀 <strong data-start="51" data-end="96">AI 神隊友上線！實作工作坊｜Microsoft × NCU 未來世代數位培力計畫</strong></p>
+<p class="PDq2pG_selectionAnchorContainer" data-start="131" data-end="247">教務處推廣教育與台灣微軟合作辦理 <strong data-start="148" data-end="180">「Microsoft × NCU 未來世代數位培力計畫」</strong>，推出 <strong data-start="184" data-end="202">4 場 AI 主題實作工作坊</strong>，從<strong data-start="204" data-end="221">學習、職涯、工作到生活應用</strong>，帶你實際體驗 AI 如何成為提升效率的「神隊友」！</p>
+<p data-start="249" data-end="375">課程以<strong data-start="252" data-end="260">實作體驗</strong>為核心，結合 Microsoft Learn 學習資源及 Microsoft 相關 AI 工具，透過情境案例與實際操作，帶領學員認識生成式 AI 與數位科技的應用，並將 AI 真正運用在<strong data-start="353" data-end="373">學習、教學、研究、行政及日常工作</strong>中。</p>
+<p data-start="377" data-end="415" data-is-last-node="" data-is-only-node=""><strong data-start="377" data-end="415" data-is-last-node="">不需要程式背景，從實際需求出發，一起把 AI 變成真正用得上的工具！</strong></p>
+<p data-start="177" data-end="321"><br><strong data-start="384" data-end="434" data-is-last-node="">📚 4 場主題，一次解鎖 AI 實用技能，歡迎對 AI 與數位科技應用有興趣的師生踴躍參加！</strong></p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01250 data-bs-toggle="tab" data-tooltip="tooltip" title="(實體)AI神隊友：30分鐘做完一份專業簡報｜Copilot辦公室超能力" href=#event115A01250 role="tab" aria-controls=event115A01250 aria-selected="true">
+						(實體)AI神隊友：30分鐘做完一份專業簡報｜Copilot辦公室超能力
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01251 data-bs-toggle="tab" data-tooltip="tooltip" title="(線上)AI未來競爭力：升學職涯神助手" href=#event115A01251 role="tab" aria-controls=event115A01251 aria-selected="true">
+						(線上)AI未來競爭力：升學職涯神助手
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01252 data-bs-toggle="tab" data-tooltip="tooltip" title="(線上)AI學習加速器：學霸都在用！讀書神隊友" href=#event115A01252 role="tab" aria-controls=event115A01252 aria-selected="true">
+						(線上)AI學習加速器：學霸都在用！讀書神隊友
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01253 data-bs-toggle="tab" data-tooltip="tooltip" title="(實體)AI生活神隊友：讓AI成為生活小幫手" href=#event115A01253 role="tab" aria-controls=event115A01253 aria-selected="true">
+						(實體)AI生活神隊友：讓AI成為生活小幫手
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01250 role="tabpanel" aria-labelledby=tabEvent115A01250>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 30<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">(實體)AI神隊友：30分鐘做完一份專業簡報｜Copilot辦公室超能力</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	李燕秋老師（君邑資訊有限公司）<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >未來研究空間(教研大樓3樓)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-07 09:00 ~ 2026-09-18 23:55</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-24 09:00 ~ 2026-09-24 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">30</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  1小時、跨域整合 :  1小時、科技應用 :  1小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="text-decoration: underline;"><strong><span style="color: #236fa1; text-decoration: underline;">AI神隊友：30分鐘做完一份專業簡報｜Copilot辦公室超能力</span><br></strong></span></span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">課程工具：M365帳號、Copilot、代理程式</span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">日期：115/09/24(四)上午9-12點 實體課程</span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">透過Copilot、Cowork工作助理等 AI 工具協助學員快速完成簡報架構規劃、內容撰寫及視覺設計，提升簡報製作效率與表達能力，培養職場及學術簡報應用能力。</span></p>
+<ol>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">AI 協助簡報主題發想與大綱規劃</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">以 Copilot 產出投影片文字重點與講稿草案</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">簡報版面、圖文與說服力優化技巧</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">盤點工作中重複性任務與自動化機會</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">利用代理程式設計行政與溝通流程應用</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">實作示範：從需求到簡報與自動化流程完成<br></span></li>
+</ol>
+<h3><span style="font-size: 14pt; font-family: 'arial black', sans-serif;"> ※敬請自行攜帶<span style="color: #000000;">：</span>筆記型電腦、電源線、延長線。</span></h3>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01251 role="tabpanel" aria-labelledby=tabEvent115A01251>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 100<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">(線上)AI未來競爭力：升學職涯神助手</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	林士傑老師（君邑資訊有限公司）<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >線上會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-07 09:00 ~ 2026-09-15 23:55</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-19 09:00 ~ 2026-09-19 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">100</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  1小時、跨域整合 :  1小時、科技應用 :  1小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;"><strong><span style="text-decoration: underline; color: #236fa1;">AI未來競爭力：升學職涯神助手</span></strong></span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;"><strong>課程工具：Copilot 、Gemini 、NotebookLM</strong></span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">方式：線上同步課程</span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">日期：115/09/19(六)上午9-12點</span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">結合生成式 AI 工具與實務案例，協助學員進行學習歷程整理、升學備審資料準備、履歷撰寫、面試模擬及職涯探索，提升升學與就業競爭力，培養未來生涯規劃能力。</span></p>
+<ol>
+<li style="font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="font-size: 14pt; line-height: 115%; font-family: 'arial black', sans-serif;">用<span lang="EN-US"> AI </span>協助整理學習經歷、社團參與與個人優勢</span></li>
+<li style="font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="font-size: 14pt; line-height: 115%; font-family: 'arial black', sans-serif;">練習撰寫履歷、自傳與申請資料的重點內容</span></li>
+<li style="font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="font-size: 14pt; line-height: 115%; font-family: 'arial black', sans-serif;"><span style="line-height: 115%;">以<span lang="EN-US"> AI </span>模擬常見面試問題與回答練習</span></span></li>
+<li style="font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="font-size: 14pt; line-height: 115%; font-family: 'arial black', sans-serif;"><span style="line-height: 115%;">學習優化自我介紹、口語表達與應對技巧</span></span></li>
+<li style="font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="font-size: 14pt; line-height: 115%; font-family: 'arial black', sans-serif;"><span style="line-height: 115%;"><span style="line-height: 115%;">透過<span lang="EN-US"> AI </span>探索科系延伸、職務方向與能力準備</span></span></span></li>
+<li style="font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="font-size: 14pt; line-height: 115%; font-family: 'arial black', sans-serif;"><span style="line-height: 115%;"><span style="line-height: 115%;">實作示範：從個人資料盤點到履歷與面試準備完成</span></span></span></li>
+</ol>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01252 role="tabpanel" aria-labelledby=tabEvent115A01252>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 100<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">(線上)AI學習加速器：學霸都在用！讀書神隊友</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	王錦宏老師（君邑資訊有限公司）<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >線上會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-07 09:00 ~ 2026-09-24 23:55</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-10-03 09:00 ~ 2026-10-03 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">100</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  1小時、跨域整合 :  1小時、科技應用 :  1小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><span style="text-decoration: underline; font-family: 'arial black', sans-serif; font-size: 14pt;"><span style="color: #236fa1; text-decoration: underline;"><strong>AI學習加速器：學霸都在用！讀書神隊友</strong></span></span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;"><strong>課程工具：Copilot  NotebookLM</strong></span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">方式：線上同步課程</span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">日期：115/10/03(六)上午9-12點</span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">運用 AI 工具進行筆記整理、閱讀摘要、重點歸納及學習規劃，協助學員建立更有效率的學習模式，提升自主學習與知識整理能力。</span></p>
+<ol>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">AI 協助整理課堂筆記與閱讀重點</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">以 Copilot 進行文章摘要、重點提問與觀念釐清</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">建立個人化學習計畫與考前複習節奏</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">運用筆記型 AI 工具建立課程知識庫</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">練習把資料轉成學習提綱、問答與複習素材</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">實作示範：從課堂資料到完整學習輔助流程</span></li>
+</ol>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01253 role="tabpanel" aria-labelledby=tabEvent115A01253>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 30<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">(實體)AI生活神隊友：讓AI成為生活小幫手</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	李燕秋老師（君邑資訊有限公司）<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >未來研究空間(教研大樓3樓)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-07 09:00 ~ 2026-11-12 23:55</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-19 09:00 ~ 2026-11-19 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">30</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  1小時、規劃行動 :  1小時、科技應用 :  1小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><span style="text-decoration: underline; font-family: 'arial black', sans-serif; font-size: 14pt;"><strong><span style="color: #236fa1; text-decoration: underline;">AI生活神隊友：讓AI成為生活小幫手</span></strong></span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">課程工具：Copilot 、Gemini 、NotebookLM</span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">方式：實體課程(中央大學)</span></p>
+<p><span style="font-family: 'arial black', sans-serif; font-size: 14pt;">日期：115/11/19(四)上午9-12點</span></p>
+<p><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">透過 AI 工具應用於個人理財、記帳管理、時間安排、旅遊規劃及生活資訊整理等情境，培養學員將 AI 融入日常生活的實務應用能力。</span></p>
+<ol>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">用 AI 協助安排課業、活動與日常待辦</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">練習以 AI 規劃旅遊行程、交通與預算概念 </span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">透過 AI 整理生活資訊並建立可查找的個人筆記</span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">認識記帳、消費比較與簡易理財分析的 AI 用法 </span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">學會把需求轉成清楚提示，得到更實用的生活建議 </span></li>
+<li style="font-size: 14pt; font-family: 'arial black', sans-serif;"><span style="font-size: 14pt; font-family: 'arial black', sans-serif;">實作示範：從生活問題到 AI 協助方案完成 </span></li>
+</ol>
+<h3><span style="font-size: 14pt; font-family: 'arial black', sans-serif;"> ※敬請自行攜帶<span style="color: #000000;">：</span>筆記型電腦、電源線、延長線。</span></h3>
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：642bbd38，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>
