@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745217"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1782900123" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138611" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610738" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440133" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138611" />	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099798"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+					</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">🦕 2026 秋季校園徵才暨國際生就業媒合會</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">學生事務處職涯發展中心</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">李家華</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">chiahua9131@ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>學生：</label>
+													<span>【全部學生】</span>
+							
+					</div>
+									<div>
+						<label>校外人士：</label>
+													<span>【校外人士】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p><strong>日期：2026.09.14（一）- 09.18（五）</strong><br><strong>時間：週一至週四 10:10 - 15:00 週五10:10-14:00</strong><br><strong>地點：</strong></p>
+<p><strong><span lang="EN-US">9/14(</span>一<span lang="EN-US">)~9/18(</span>四<span lang="EN-US">) </span>學務處二樓 會議室 (中正圖書館)</strong></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph;"><span style="color: #e03e2d;"><strong>9/18(五) 教學研究大樓北棟1F 羅家倫講堂</strong></span></p>
+<p>針對不同領域相關產業安排眾多場次之企業說明會，透過說明會的方式讓企業親自蒞校與同學近距離接觸，將公司資訊及人才需求等重要資訊確切地傳達給同學；讓學生在參與說明會的過程中，了解企業在專業領域的發展方向以及團隊內部的運作模式，達到職涯探索的無限可能。</p>
+<p>⭐️好康懶人包</p>
+<ol>
+<li>線上報名完成且前 20位入場者可領取中央大學健身房健身券兩張</li>
+<li>參加活動有機會獲得企業提供之精美禮品</li>
+<li>活動中可更認識該場次企業之發展方向、企業文化、員工福利等重要訊息</li>
+<li>會後同學可針對想進一步了解的問題與企業做一對一諮詢</li>
+<li>會後填寫回饋問卷，出示填寫完成畫面就有機會獲得精美禮物(每人限領一份)，每日數量有限，送完為止</li>
+</ol>
+<p>⚠️學生注意事項</p>
+<ol>
+<li>請同學們<span style="color: #e03e2d;">務必線上報名</span>，以利主辦單位與企業端統計人數、準備文宣品。</li>
+<li>當日請<span style="color: #e03e2d;">攜帶學生證與手機</span>。學生證至報到處逼卡，領取相關文件，手機填寫回饋問卷。</li>
+<li>參與活動的「您」代表中央大學的每一份子，請務必注意自己對企業的禮儀。</li>
+<li>若同學報名場次後無法參與，請在報名場次<span style="color: #e03e2d;">3天前</span>上活動報名系統取消，如未出席者，將累積「未出席紀錄1次」， 若達3次(含)以上，將影響其未來參與職涯中心主辦活動及抽獎等權益。<br>註：敬請詳閱<a href="https://www.facebook.com/100063591350693/posts/5196550217035022/" target="_blank" rel="noopener noreferrer">公告連結</a>，以確保自身權益，謝謝！</li>
+<li>參與 2026 秋季校園徵才企業說明會 09/14-09/18 活動場次的同學，服務學習時數將於活動結束後15個工作日(不含假日)登錄服務學習網站。請同學於<span style="background-color: #ffffff;">10/12-10/16</span> 後登入服務學習網站查詢時數是否登錄完畢。若經查詢並未發現時數，請於<span style="background-color: #ffffff;">10/30</span>前來信ncucareer2020@g.ncu.edu.tw告知參與活動名稱、場次、姓名、學號、聯絡方式，以利主辦單位協助核對相關資料。逾期者主辦單位將不接受辦理，並有權拒絕核發相關服務學習時數。</li>
+<li>優先開放本校學生入場，若報名未滿則開放校外同學參加。</li>
+</ol>
+<p>For students who participated in the Company Info Sessions of NCU Autumn CampusTalent Recruitment from 09/14-09/18 , the service learning hours will be posted on the service learning website 15 days after the event (excluding holidays). Please log in to the service learning website during the weeks of <span style="background-color: #ffffff;">10/12-10/16</span> to check if the hours have been filed. If you do not find any hours on the website, please send an email to <u>ncucareer2020@g.ncu.edu.tw</u> with the name of the event and session which you had participated, along with your name, student ID number ,and contact information for the organizer to check the relevant information. The organizer will not accept late applications and reserves the right to refuse to issue service learning hours.</p>
+<p> </p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01307 data-bs-toggle="tab" data-tooltip="tooltip" title="裕隆經管企業股份有限公司" href=#event115A01307 role="tab" aria-controls=event115A01307 aria-selected="true">
+						裕隆經管企業股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01314 data-bs-toggle="tab" data-tooltip="tooltip" title="熱火數碼資訊股份有限公司-WPORT（職航站）" href=#event115A01314 role="tab" aria-controls=event115A01314 aria-selected="true">
+						熱火數碼資訊股份有限公司-WPORT（職航站）
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01315 data-bs-toggle="tab" data-tooltip="tooltip" title="台灣基恩斯股份有限公司" href=#event115A01315 role="tab" aria-controls=event115A01315 aria-selected="true">
+						台灣基恩斯股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01316 data-bs-toggle="tab" data-tooltip="tooltip" title="研發替代役場次" href=#event115A01316 role="tab" aria-controls=event115A01316 aria-selected="true">
+						研發替代役場次
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01317 data-bs-toggle="tab" data-tooltip="tooltip" title="安永台灣 EY Taiwan-安永聯合會計師事務所" href=#event115A01317 role="tab" aria-controls=event115A01317 aria-selected="true">
+						安永台灣 EY Taiwan-安永聯合會計師事務所
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01318 data-bs-toggle="tab" data-tooltip="tooltip" title="瑞儀光電股份有限公司" href=#event115A01318 role="tab" aria-controls=event115A01318 aria-selected="true">
+						瑞儀光電股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01319 data-bs-toggle="tab" data-tooltip="tooltip" title="中華精測科技股份有限公司" href=#event115A01319 role="tab" aria-controls=event115A01319 aria-selected="true">
+						中華精測科技股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01320 data-bs-toggle="tab" data-tooltip="tooltip" title="大立光電股份有限公司" href=#event115A01320 role="tab" aria-controls=event115A01320 aria-selected="true">
+						大立光電股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01321 data-bs-toggle="tab" data-tooltip="tooltip" title="群聯電子股份有限公司" href=#event115A01321 role="tab" aria-controls=event115A01321 aria-selected="true">
+						群聯電子股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01322 data-bs-toggle="tab" data-tooltip="tooltip" title="工業技術研究院" href=#event115A01322 role="tab" aria-controls=event115A01322 aria-selected="true">
+						工業技術研究院
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01323 data-bs-toggle="tab" data-tooltip="tooltip" title="中華科盛德光罩股份有限公司" href=#event115A01323 role="tab" aria-controls=event115A01323 aria-selected="true">
+						中華科盛德光罩股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01324 data-bs-toggle="tab" data-tooltip="tooltip" title="巨茂應用材料股份有限公司" href=#event115A01324 role="tab" aria-controls=event115A01324 aria-selected="true">
+						巨茂應用材料股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01325 data-bs-toggle="tab" data-tooltip="tooltip" title="景碩科技股份有限公司" href=#event115A01325 role="tab" aria-controls=event115A01325 aria-selected="true">
+						景碩科技股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01326 data-bs-toggle="tab" data-tooltip="tooltip" title="瑞昱半導體股份有限公司" href=#event115A01326 role="tab" aria-controls=event115A01326 aria-selected="true">
+						瑞昱半導體股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01327 data-bs-toggle="tab" data-tooltip="tooltip" title="威聯通科技股份有限公司" href=#event115A01327 role="tab" aria-controls=event115A01327 aria-selected="true">
+						威聯通科技股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01329 data-bs-toggle="tab" data-tooltip="tooltip" title="台灣美光記憶體股份有限公司" href=#event115A01329 role="tab" aria-controls=event115A01329 aria-selected="true">
+						台灣美光記憶體股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01330 data-bs-toggle="tab" data-tooltip="tooltip" title="廣達電腦股份有限公司" href=#event115A01330 role="tab" aria-controls=event115A01330 aria-selected="true">
+						廣達電腦股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01331 data-bs-toggle="tab" data-tooltip="tooltip" title="世界先進積體電路股份有限公司" href=#event115A01331 role="tab" aria-controls=event115A01331 aria-selected="true">
+						世界先進積體電路股份有限公司
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01307 role="tabpanel" aria-labelledby=tabEvent115A01307>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">裕隆經管企業股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2F會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-14 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-14 12:10 ~ 2026-09-14 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01314 role="tabpanel" aria-labelledby=tabEvent115A01314>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">熱火數碼資訊股份有限公司-WPORT（職航站）</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2F會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-14 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-14 13:10 ~ 2026-09-14 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01315 role="tabpanel" aria-labelledby=tabEvent115A01315>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">台灣基恩斯股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2F會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-14 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-14 14:10 ~ 2026-09-14 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01316 role="tabpanel" aria-labelledby=tabEvent115A01316>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">研發替代役場次</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-15 10:20</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-15 10:30 ~ 2026-09-15 11:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01317 role="tabpanel" aria-labelledby=tabEvent115A01317>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">安永台灣 EY Taiwan-安永聯合會計師事務所</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-15 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-15 12:10 ~ 2026-09-15 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p>請同學於報名時完成問卷填寫!</p>
+<p>另外，該場次提供精緻餐點，且參加者有機會獲得AirPods!</p>
+<p>*活動現場將公布<span lang="EN-US">AirPods</span>抽獎辦法</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01318 role="tabpanel" aria-labelledby=tabEvent115A01318>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">瑞儀光電股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-15 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-15 14:10 ~ 2026-09-15 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01319 role="tabpanel" aria-labelledby=tabEvent115A01319>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">中華精測科技股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 10:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 10:10 ~ 2026-09-16 11:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01320 role="tabpanel" aria-labelledby=tabEvent115A01320>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">大立光電股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 11:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 11:10 ~ 2026-09-16 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01321 role="tabpanel" aria-labelledby=tabEvent115A01321>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">群聯電子股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 12:10 ~ 2026-09-16 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01322 role="tabpanel" aria-labelledby=tabEvent115A01322>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">工業技術研究院</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 13:10 ~ 2026-09-16 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01323 role="tabpanel" aria-labelledby=tabEvent115A01323>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">中華科盛德光罩股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 14:10 ~ 2026-09-16 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01324 role="tabpanel" aria-labelledby=tabEvent115A01324>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">巨茂應用材料股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 11:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 11:10 ~ 2026-09-17 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01325 role="tabpanel" aria-labelledby=tabEvent115A01325>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">景碩科技股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 12:10 ~ 2026-09-17 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01326 role="tabpanel" aria-labelledby=tabEvent115A01326>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">瑞昱半導體股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 13:10 ~ 2026-09-17 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01327 role="tabpanel" aria-labelledby=tabEvent115A01327>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">威聯通科技股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 14:10 ~ 2026-09-17 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01329 role="tabpanel" aria-labelledby=tabEvent115A01329>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">台灣美光記憶體股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教學研究大樓羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-18 11:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 11:10 ~ 2026-09-18 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01330 role="tabpanel" aria-labelledby=tabEvent115A01330>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">廣達電腦股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教學研究大樓羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-18 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 12:10 ~ 2026-09-18 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01331 role="tabpanel" aria-labelledby=tabEvent115A01331>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">世界先進積體電路股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教學研究大樓羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-18 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 13:10 ~ 2026-09-18 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：f0aedf28，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>

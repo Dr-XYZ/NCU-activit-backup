@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745217"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1782900123" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138611" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610738" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440133" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138611" />	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099798"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+					</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">預約115年9月中大短程接駁車</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">總務處事務組</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">鍾欣榮</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">chungsj@ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>教職員：</label>
+													<span>【全部教職員】</span>
+							
+					</div>
+									<div>
+						<label>學生：</label>
+													<span>【全部學生】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p>為疏緩本校教職員生對外交通需求，<span style="color: #e03e2d;">每週五或連假前一日(不含暑假)乘車尖峰時段</span>，擬由本校租賃短程接駁車，提供<span style="background-color: #f1c40f;"><strong>「中大至高鐵桃園站」</strong></span>之短程接駁專車彈性補足客運班次不足之情形，<span style="color: #e03e2d;">請依需求預約乘車</span>。</p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif; color: #e03e2d;">【提醒】希望大家在預約乘車時，盡量先確認個人行程之安排，避免浪費有限資源，謝謝。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;">【預約說明】</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">1. </span>每位預約者僅可選擇其中一個乘車時段，且<span style="color: #000000; background-color: #f1c40f;"><strong style="mso-bidi-font-weight: normal;"><span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">每一乘車時段之預約人數若未達<span lang="EN-US">15</span>人則該時段不發車</span></strong><span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">。</span></span></span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">2. </span>依報名順序，排定正取及候補名單。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">3. 報名</span>完成後，若要取消，請自行於預約截止期限前至報名連結點選【取消報名】。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif; color: #e03e2d;"><span lang="EN-US">4. </span>若於預約截止期限後，臨時取消預約達<span lang="EN-US">3</span>次者，將取消自『臨時取消預約達<span lang="EN-US">3</span>次』之預約乘車日起算，後<span lang="EN-US">3</span>個月之預約資格。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif; color: #e03e2d;"><span lang="EN-US">5. </span>預約截止期限後，正取名單之預約者，若無故未乘車，將取消自乘車日起算後<span lang="EN-US">3</span>個月之預約資格。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">6. 報名完成後</span>，總務處將於預計發車前一日，以E<span lang="EN-US">-mail</span>方式通知預約者是否順利發車，請申請者務必留下常用之電子郵件信箱及手機號碼，以便即時通知。</span></p>
+<p class="MsoNormal" style="margin-top: 6.0pt; mso-para-margin-top: .5gd;"><span style="font-family: arial, helvetica, sans-serif;">【乘車說明】</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">1. </span>收費金額：新臺幣<span lang="EN-US">15</span>元整。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">2. </span>付費方式：限以悠遊卡付款。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">3. </span>乘車憑證：依教職員工生證核驗乘車身分。</span></p>
+<p class="MsoNormal"><span style="font-family: arial, helvetica, sans-serif;"><span lang="EN-US">4. </span>乘車地點：本校前門行政大樓前。</span></p>
+<p class="MsoNormal" style="margin-top: 6.0pt; mso-para-margin-top: .5gd;"><span style="font-family: arial, helvetica, sans-serif; background-color: #f1c40f;">【預計發車日期】詳如報名頁籤。</span></p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01295 data-bs-toggle="tab" data-tooltip="tooltip" title="115年9月4日接駁車預約" href=#event115A01295 role="tab" aria-controls=event115A01295 aria-selected="true">
+						115年9月4日接駁車預約
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01296 data-bs-toggle="tab" data-tooltip="tooltip" title="115年9月11日接駁車預約" href=#event115A01296 role="tab" aria-controls=event115A01296 aria-selected="true">
+						115年9月11日接駁車預約
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01298 data-bs-toggle="tab" data-tooltip="tooltip" title="115年9月18日接駁車預約" href=#event115A01298 role="tab" aria-controls=event115A01298 aria-selected="true">
+						115年9月18日接駁車預約
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01299 data-bs-toggle="tab" data-tooltip="tooltip" title="115年9月24日接駁車預約" href=#event115A01299 role="tab" aria-controls=event115A01299 aria-selected="true">
+						115年9月24日接駁車預約
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01295 role="tabpanel" aria-labelledby=tabEvent115A01295>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：3 / 40<br />
+								備取人數：0 / 10
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">115年9月4日接駁車預約</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >本校行政大樓前</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-08-25 12:00 ~ 2026-09-02 23:59</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-04 17:10 ~ 2026-09-04 17:20</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">40</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">10</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								綠色永續 :  0小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p>歡迎預約搭乘中大短程接駁車，<strong><span style="color: #e03e2d; background-color: #fbeeb8;">每一乘車時段之預約人數若【未達15人則該時段不發車】，請留意報名人數。</span></strong></p>
+<p><br><span style="background-color: #fbeeb8;">總務處將於預計發車前一日另以E-mail通知預約者是否順利發車。</span></p>
+<p><br><strong><span style="color: #236fa1;">★★如有順利發車，相關注意事項如下：</span></strong></p>
+<p>預計報到時間：115年 9月 4日(星期五) 17:10</p>
+<p><strong><span style="background-color: #fbeeb8;">預計發車時間：115年 9月 4日(星期五) 17:20</span></strong></p>
+<p><span style="background-color: #fbeeb8;">乘車地點：本校行政大樓前</span></p>
+<p><strong><span style="background-color: #fbeeb8;">目的地：高鐵桃園站</span></strong></p>
+<p>應備證件：教職員證或學生證</p>
+<p>收費金額：新臺幣15元整</p>
+<p>付費方式：限以悠遊卡付款（請務必事先備好可付款之悠遊卡）</p>
+<p> </p>
+<p>1.  請於發車前10分鐘抵達乘車地點。<strong><span style="background-color: #fbeeb8; color: #e03e2d;">準時發車，逾時不候。</span></strong></p>
+<p>2.  乘車時須憑教職員生證核驗乘車身分。</p>
+<p>3.  自114年11月起，若於預約截止日後臨時取消預約 達3次 者，將取消自臨時取消預約達3次之預約乘車日起算後3個月之預約資格。</p>
+<p>4. <strong><span style="background-color: #f8cac6;">如要取消乘車，請提前於115年9月3日(星期四)23:59前</span></strong>，自報名系統申請取消。若無故未乘車，將取消自乘車日起算後3個月之預約資格。</p>
+<p>以上，若有相關疑問，歡迎來信chungsj@ncu.edu.tw或電洽事務組鍾小姐03-4227151分機：57314</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01296 role="tabpanel" aria-labelledby=tabEvent115A01296>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：5 / 40<br />
+								備取人數：0 / 10
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">115年9月11日接駁車預約</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >本校行政大樓前</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-08-25 12:00 ~ 2026-09-09 23:59</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-11 17:10 ~ 2026-09-11 17:20</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">40</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">10</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								綠色永續 :  0小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p>歡迎預約搭乘中大短程接駁車，<strong><span style="color: #e03e2d; background-color: #fbeeb8;">每一乘車時段之預約人數若【未達15人則該時段不發車】，請留意報名人數。</span></strong></p>
+<p><br><span style="background-color: #fbeeb8;">總務處將於預計發車前一日另以E-mail通知預約者是否順利發車。</span></p>
+<p><br><strong><span style="color: #236fa1;">★★如有順利發車，相關注意事項如下：</span></strong></p>
+<p>預計報到時間：115年 9月 11日(星期五) 17:10</p>
+<p><strong><span style="background-color: #fbeeb8;">預計發車時間：115年 9月 11日(星期五) 17:20</span></strong></p>
+<p><span style="background-color: #fbeeb8;">乘車地點：本校行政大樓前</span></p>
+<p><strong><span style="background-color: #fbeeb8;">目的地：高鐵桃園站</span></strong></p>
+<p>應備證件：教職員證或學生證</p>
+<p>收費金額：新臺幣15元整</p>
+<p>付費方式：限以悠遊卡付款（請務必事先備好可付款之悠遊卡）</p>
+<p> </p>
+<p>1.  請於發車前10分鐘抵達乘車地點。<strong><span style="background-color: #fbeeb8; color: #e03e2d;">準時發車，逾時不候。</span></strong></p>
+<p>2.  乘車時須憑教職員生證核驗乘車身分。</p>
+<p>3.  自114年11月起，若於預約截止日後臨時取消預約 達3次 者，將取消自臨時取消預約達3次之預約乘車日起算後3個月之預約資格。</p>
+<p>4. <strong><span style="background-color: #f8cac6;">如要取消乘車，請提前於115年9月10日(星期四)23:59前</span></strong>，自報名系統申請取消。若無故未乘車，將取消自乘車日起算後3個月之預約資格。</p>
+<p>以上，若有相關疑問，歡迎來信chungsj@ncu.edu.tw或電洽事務組鍾小姐03-4227151分機：57314</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01298 role="tabpanel" aria-labelledby=tabEvent115A01298>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：3 / 40<br />
+								備取人數：0 / 10
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">115年9月18日接駁車預約</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >本校行政大樓前</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-08-25 13:00 ~ 2026-09-16 23:59</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 17:10 ~ 2026-09-18 17:20</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">40</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">10</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								綠色永續 :  0小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p>歡迎預約搭乘中大短程接駁車，<strong><span style="color: #e03e2d; background-color: #fbeeb8;">每一乘車時段之預約人數若【未達15人則該時段不發車】，請留意報名人數。</span></strong></p>
+<p><br><span style="background-color: #fbeeb8;">總務處將於預計發車前一日另以E-mail通知預約者是否順利發車。</span></p>
+<p><br><strong><span style="color: #236fa1;">★★如有順利發車，相關注意事項如下：</span></strong></p>
+<p>預計報到時間：115年 9月 18日(星期五) 17:10</p>
+<p><strong><span style="background-color: #fbeeb8;">預計發車時間：115年 9月 18日(星期五) 17:20</span></strong></p>
+<p><span style="background-color: #fbeeb8;">乘車地點：本校行政大樓前</span></p>
+<p><strong><span style="background-color: #fbeeb8;">目的地：高鐵桃園站</span></strong></p>
+<p>應備證件：教職員證或學生證</p>
+<p>收費金額：新臺幣15元整</p>
+<p>付費方式：限以悠遊卡付款（請務必事先備好可付款之悠遊卡）</p>
+<p> </p>
+<p>1.  請於發車前10分鐘抵達乘車地點。<strong><span style="background-color: #fbeeb8; color: #e03e2d;">準時發車，逾時不候。</span></strong></p>
+<p>2.  乘車時須憑教職員生證核驗乘車身分。</p>
+<p>3.  自114年11月起，若於預約截止日後臨時取消預約 達3次 者，將取消自臨時取消預約達3次之預約乘車日起算後3個月之預約資格。</p>
+<p>4. <strong><span style="background-color: #f8cac6;">如要取消乘車，請提前於115年9月17日(星期四)23:59前</span></strong>，自報名系統申請取消。若無故未乘車，將取消自乘車日起算後3個月之預約資格。</p>
+<p>以上，若有相關疑問，歡迎來信chungsj@ncu.edu.tw或電洽事務組鍾小姐03-4227151分機：57314</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01299 role="tabpanel" aria-labelledby=tabEvent115A01299>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：27 / 40<br />
+								備取人數：0 / 10
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">115年9月24日接駁車預約</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >本校行政大樓前</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-08-25 13:00 ~ 2026-09-21 23:59</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-24 17:10 ~ 2026-09-24 17:20</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">40</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">10</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								綠色永續 :  0小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p>歡迎預約搭乘中大短程接駁車，<strong><span style="color: #e03e2d; background-color: #fbeeb8;">每一乘車時段之預約人數若【未達15人則該時段不發車】，請留意報名人數。</span></strong></p>
+<p><br><span style="background-color: #fbeeb8;">總務處將於預計發車前一日另以E-mail通知預約者是否順利發車。</span></p>
+<p><br><strong><span style="color: #236fa1;">★★如有順利發車，相關注意事項如下：</span></strong></p>
+<p>預計報到時間：115年 9月 24日(星期四) 17:10</p>
+<p><strong><span style="background-color: #fbeeb8;">預計發車時間：115年 9月 24日(星期四) 17:20</span></strong></p>
+<p><span style="background-color: #fbeeb8;">乘車地點：本校行政大樓前</span></p>
+<p><strong><span style="background-color: #fbeeb8;">目的地：高鐵桃園站</span></strong></p>
+<p>應備證件：教職員證或學生證</p>
+<p>收費金額：新臺幣15元整</p>
+<p>付費方式：限以悠遊卡付款（請務必事先備好可付款之悠遊卡）</p>
+<p> </p>
+<p>1.  請於發車前10分鐘抵達乘車地點。<strong><span style="background-color: #fbeeb8; color: #e03e2d;">準時發車，逾時不候。</span></strong></p>
+<p>2.  乘車時須憑教職員生證核驗乘車身分。</p>
+<p>3.  自114年11月起，若於預約截止日後臨時取消預約 達3次 者，將取消自臨時取消預約達3次之預約乘車日起算後3個月之預約資格。</p>
+<p>4. <strong><span style="background-color: #f8cac6;">如要取消乘車，請提前於115年9月23日(星期三)23:59前</span></strong>，自報名系統申請取消。若無故未乘車，將取消自乘車日起算後3個月之預約資格。</p>
+<p>以上，若有相關疑問，歡迎來信chungsj@ncu.edu.tw或電洽事務組鍾小姐03-4227151分機：57314</p>
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：f0aedf28，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>
