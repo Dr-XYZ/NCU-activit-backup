@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745236"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1782900153" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138642" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610760" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440156" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138642" />	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099845"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+					</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+	<div class="container">
+		<img src="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery/showImage/pp9-e4iEqql5nJyYxNnR" class="mx-auto d-block" style="max-height:800px; max-width:100%;" />
+		<hr />
+	</div>
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">🦕 2026 秋季校園徵才暨國際生就業媒合會</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">學生事務處職涯發展中心</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">李家華</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">chiahua9131@ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>學生：</label>
+													<span>【全部學生】</span>
+							
+					</div>
+									<div>
+						<label>校外人士：</label>
+													<span>【校外人士】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p><strong>日期：2026.09.14（一）- 09.18（五）</strong><br><strong>時間：週一至週四 10:10 - 15:00 週五10:10-14:00</strong><br><strong>地點：</strong></p>
+<p><strong><span lang="EN-US">9/14(</span>一<span lang="EN-US">)~9/17(</span>四<span lang="EN-US">) </span>學務處二樓 會議室 (中正圖書館)</strong></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph;"><span style="color: #e03e2d;"><strong>9/18(五) 教學研究大樓北棟1F 羅家倫講堂</strong></span></p>
+<p>針對不同領域相關產業安排眾多場次之企業說明會，透過說明會的方式讓企業親自蒞校與同學近距離接觸，將公司資訊及人才需求等重要資訊確切地傳達給同學；讓學生在參與說明會的過程中，了解企業在專業領域的發展方向以及團隊內部的運作模式，達到職涯探索的無限可能。</p>
+<p>⭐️好康懶人包</p>
+<ol>
+<li>線上報名完成且前 20位入場者可領取中央大學健身房健身券兩張</li>
+<li>參加活動有機會獲得企業提供之精美禮品</li>
+<li>活動中可更認識該場次企業之發展方向、企業文化、員工福利等重要訊息</li>
+<li>會後同學可針對想進一步了解的問題與企業做一對一諮詢</li>
+<li>會後填寫回饋問卷，出示填寫完成畫面就有機會獲得精美禮物(每人限領一份)，每日數量有限，送完為止</li>
+</ol>
+<p>⚠️學生注意事項</p>
+<ol>
+<li>請同學們<span style="color: #e03e2d;">務必線上報名</span>，以利主辦單位與企業端統計人數、準備文宣品。</li>
+<li>當日請<span style="color: #e03e2d;">攜帶學生證與手機</span>。學生證至報到處逼卡，領取相關文件，手機填寫回饋問卷。</li>
+<li>參與活動的「您」代表中央大學的每一份子，請務必注意自己對企業的禮儀。</li>
+<li>若同學報名場次後無法參與，請在報名場次<span style="color: #e03e2d;">3天前</span>上活動報名系統取消，如未出席者，將累積「未出席紀錄1次」， 若達3次(含)以上，將影響其未來參與職涯中心主辦活動及抽獎等權益。<br>註：敬請詳閱<a href="https://www.facebook.com/100063591350693/posts/5196550217035022/" target="_blank" rel="noopener noreferrer">公告連結</a>，以確保自身權益，謝謝！</li>
+<li>參與 2026 秋季校園徵才企業說明會 09/14-09/18 活動場次的同學，服務學習時數將於活動結束後15個工作日(不含假日)登錄服務學習網站。請同學於<span style="background-color: #ffffff;">10/12-10/16</span> 後登入服務學習網站查詢時數是否登錄完畢。若經查詢並未發現時數，請於<span style="background-color: #ffffff;">10/30</span>前來信ncucareer2020@g.ncu.edu.tw告知參與活動名稱、場次、姓名、學號、聯絡方式，以利主辦單位協助核對相關資料。逾期者主辦單位將不接受辦理，並有權拒絕核發相關服務學習時數。</li>
+<li>優先開放本校學生入場，若報名未滿則開放校外同學參加。</li>
+</ol>
+<p>For students who participated in the Company Info Sessions of NCU Autumn CampusTalent Recruitment from 09/14-09/18 , the service learning hours will be posted on the service learning website 15 days after the event (excluding holidays). Please log in to the service learning website during the weeks of <span style="background-color: #ffffff;">10/12-10/16</span> to check if the hours have been filed. If you do not find any hours on the website, please send an email to <u>ncucareer2020@g.ncu.edu.tw</u> with the name of the event and session which you had participated, along with your name, student ID number ,and contact information for the organizer to check the relevant information. The organizer will not accept late applications and reserves the right to refuse to issue service learning hours.</p>
+<p> </p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01307 data-bs-toggle="tab" data-tooltip="tooltip" title="裕隆經管企業股份有限公司" href=#event115A01307 role="tab" aria-controls=event115A01307 aria-selected="true">
+						裕隆經管企業股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01314 data-bs-toggle="tab" data-tooltip="tooltip" title="熱火數碼資訊股份有限公司-WPORT（職航站）" href=#event115A01314 role="tab" aria-controls=event115A01314 aria-selected="true">
+						熱火數碼資訊股份有限公司-WPORT（職航站）
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01315 data-bs-toggle="tab" data-tooltip="tooltip" title="台灣基恩斯股份有限公司" href=#event115A01315 role="tab" aria-controls=event115A01315 aria-selected="true">
+						台灣基恩斯股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01316 data-bs-toggle="tab" data-tooltip="tooltip" title="研發替代役場次" href=#event115A01316 role="tab" aria-controls=event115A01316 aria-selected="true">
+						研發替代役場次
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01317 data-bs-toggle="tab" data-tooltip="tooltip" title="安永台灣 EY Taiwan-安永聯合會計師事務所" href=#event115A01317 role="tab" aria-controls=event115A01317 aria-selected="true">
+						安永台灣 EY Taiwan-安永聯合會計師事務所
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01318 data-bs-toggle="tab" data-tooltip="tooltip" title="瑞儀光電股份有限公司" href=#event115A01318 role="tab" aria-controls=event115A01318 aria-selected="true">
+						瑞儀光電股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01319 data-bs-toggle="tab" data-tooltip="tooltip" title="中華精測科技股份有限公司" href=#event115A01319 role="tab" aria-controls=event115A01319 aria-selected="true">
+						中華精測科技股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01320 data-bs-toggle="tab" data-tooltip="tooltip" title="大立光電股份有限公司" href=#event115A01320 role="tab" aria-controls=event115A01320 aria-selected="true">
+						大立光電股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01321 data-bs-toggle="tab" data-tooltip="tooltip" title="群聯電子股份有限公司" href=#event115A01321 role="tab" aria-controls=event115A01321 aria-selected="true">
+						群聯電子股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01322 data-bs-toggle="tab" data-tooltip="tooltip" title="工業技術研究院" href=#event115A01322 role="tab" aria-controls=event115A01322 aria-selected="true">
+						工業技術研究院
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01323 data-bs-toggle="tab" data-tooltip="tooltip" title="中華科盛德光罩股份有限公司" href=#event115A01323 role="tab" aria-controls=event115A01323 aria-selected="true">
+						中華科盛德光罩股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01324 data-bs-toggle="tab" data-tooltip="tooltip" title="巨茂應用材料股份有限公司" href=#event115A01324 role="tab" aria-controls=event115A01324 aria-selected="true">
+						巨茂應用材料股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01325 data-bs-toggle="tab" data-tooltip="tooltip" title="景碩科技股份有限公司" href=#event115A01325 role="tab" aria-controls=event115A01325 aria-selected="true">
+						景碩科技股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01326 data-bs-toggle="tab" data-tooltip="tooltip" title="瑞昱半導體股份有限公司" href=#event115A01326 role="tab" aria-controls=event115A01326 aria-selected="true">
+						瑞昱半導體股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01327 data-bs-toggle="tab" data-tooltip="tooltip" title="威聯通科技股份有限公司" href=#event115A01327 role="tab" aria-controls=event115A01327 aria-selected="true">
+						威聯通科技股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01329 data-bs-toggle="tab" data-tooltip="tooltip" title="台灣美光記憶體股份有限公司" href=#event115A01329 role="tab" aria-controls=event115A01329 aria-selected="true">
+						台灣美光記憶體股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01330 data-bs-toggle="tab" data-tooltip="tooltip" title="廣達電腦股份有限公司" href=#event115A01330 role="tab" aria-controls=event115A01330 aria-selected="true">
+						廣達電腦股份有限公司
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01331 data-bs-toggle="tab" data-tooltip="tooltip" title="世界先進積體電路股份有限公司" href=#event115A01331 role="tab" aria-controls=event115A01331 aria-selected="true">
+						世界先進積體電路股份有限公司
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01307 role="tabpanel" aria-labelledby=tabEvent115A01307>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：11 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">裕隆經管企業股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2F會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-14 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-14 12:10 ~ 2026-09-14 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>裕隆集團於1951年以紡織工業起家，1953年投入汽車工業，其間陸續發展事業範疇，增加高科技、營建、創投與投資，總數超過120家公司，2008年更成立汽車自主品牌「納智捷LUXGEN」。</p>
+<p>走過六十載，裕隆集團秉持創辦人嚴慶齡先生剛毅的精神傳承，肩負著前瞻未來、永續經營的使命，歷經時代考驗，伴隨著台灣社會從傳統走向現代化，不斷提升自我能力，帶動產業價值鏈朝向跨產業發展，更致力於企業社會責任的經營與承諾，期以促進經濟發展、將台灣自主品牌推向國際，成為令人引以為傲的裕隆。</p>
+<p><strong>集團營業項目</strong></p>
+<ol>
+<li>裕隆經管：綜理集團事業管理。</li>
+<li>裕隆汽車：多品牌汽車製造及代工。</li>
+<li>裕隆日產：NISSAN品牌車輛銷售、進口及服務。</li>
+<li>納智捷：自有品牌納智捷Luxgen車輛銷售及服務。</li>
+<li>華創車電：整車設計與開發。</li>
+<li>華擎機械：汽車引擎研發設計與製造。</li>
+<li>除主要的汽車事業群外，亦包含紡織、投資保險、營建、汽車週邊水平事業、行銷通路等各項事業。</li>
+</ol>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01314 role="tabpanel" aria-labelledby=tabEvent115A01314>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">熱火數碼資訊股份有限公司-WPORT（職航站）</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2F會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-14 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-14 13:10 ~ 2026-09-14 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>熱火數碼資訊股份有限公司（WPORT 職航站）成立於 2023 年，總部位於桃園蘆竹，專注 AI 驅動的求職媒合與企業招募 SaaS 平台。我們以「讓求職更簡單、讓招募更精準」為使命，服務超過 1,000 家企業與 10 萬名求職者。</p>
+<p><strong>【產品與服務】</strong></p>
+<ul>
+<li>WPORT 職航站：一站式求職媒合平台</li>
+<li>企業招募管理系統</li>
+<li>AI 履歷解析與人才推薦</li>
+<li>校園徵才與實習媒合</li>
+</ul>
+<p><strong>【團隊特色】</strong></p>
+<ul>
+<li>全遠端／混合工作模式</li>
+<li>扁平組織，工程師可直接參與產品決策</li>
+<li>技術棧：React、Node.js、Python、Cloudflare Workers</li>
+</ul>
+<p><strong>【開放職缺】</strong></p>
+<ul>
+<li>客戶關係</li>
+<li>業務</li>
+<li>行銷</li>
+</ul>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01315 role="tabpanel" aria-labelledby=tabEvent115A01315>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：1 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">台灣基恩斯股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2F會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-14 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-14 14:10 ~ 2026-09-14 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01316 role="tabpanel" aria-labelledby=tabEvent115A01316>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：7 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">研發替代役場次</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-15 10:20</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-15 10:30 ~ 2026-09-15 11:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01317 role="tabpanel" aria-labelledby=tabEvent115A01317>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：13 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">安永台灣 EY Taiwan-安永聯合會計師事務所</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-11 23:59</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-15 12:10 ~ 2026-09-15 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、前測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>安永台灣 EY Taiwan-安永聯合會計師事務所協助數位化領域的先趨者遏止資訊剽竊的行為；協助政府應對現金流危機；透過數據分析發掘先進的醫療方法；提供高品質的審計服務，幫助金融市場和企業建立信任。總言之，我與企業家、企業和國家攜手解決當前最迫切的挑戰。</p>
+<p>透過4個專業領域－審計、稅務、諮詢和策略與交易諮詢的整合服務－以及深厚的產業知識，協助客戶掌握契機，評估和管理風險，以實現實際且可預期的成長目標。高績效的跨領域專業團隊，能夠協助客戶滿足監管要求，確保投資者了解當前局勢，並滿足利害關係人的需求。</p>
+<p>我們認為，在更美好的商業世界中，經濟成長更具永續性和包容性。我們持續致力於提升所有服務的品質，積極投資我們的員工並鼓勵創新。與他人─從客戶到更廣泛的利害關係人─協作，運用我們的專業知識、技能及經驗，帶來正向的改變。</p>
+<p><strong>企業經營理念</strong></p>
+<p>多元化與包容性((Diversity and Inclusiveness)是安永企業核心文化，營造多元包容職場環境為我們經營的初衷及目標。唯有融合多元背景、綜合不同視角才能打造高績效團隊; 尊重並重視個別差異才能讓員工一展長才。同時，我們鼓勵員工保有創新思維(持續學習) 、分析思維(洞察解決問題) 、及全球性思維(全球化市場)，進而讓我們的團隊與客戶激盪出更好的火花，共同建設更美好的商業世界。</p>
+<p>⭐️請同學於報名時完成問卷填寫!</p>
+<p>另外，該場次提供精緻餐點，且參加者有機會獲得AirPods!</p>
+<p>*活動現場將公布<span lang="EN-US">AirPods</span>抽獎辦法</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01318 role="tabpanel" aria-labelledby=tabEvent115A01318>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">瑞儀光電股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-15 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-15 14:10 ~ 2026-09-15 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>瑞儀光電成立於1995年7月，座落於人文薈萃的高雄港區，是國內第一家從事專業導光板與背光模組製造的公司。隨著營運拓展，接連於2002、2003、2007年於大陸設立吳江、南京、廣州廠區，吳江廠區為目前集團最大生產基地，透過生產供應鏈的群聚模式，提供客戶更即時的產品服務。</p>
+<p>瑞儀光電的核心有別於其他公司，涵蓋光學設計、模具開發、導光板射出及LCM組裝，以一條龍的方式，從開發時就將整個光學技術設計到產品裡，甚至與客戶共同開發機種，以符合客戶產品的需求。成功的策略引領瑞儀光電自2001年開始連續15年獲利，2011至2013年更創下連續3年賺一個股本的佳績。有鑑於智能手機的主流地位，瑞儀光電自2014年起開始導入中小尺寸背光模組，成功切入美系大廠熱銷手機供應鏈，開創瑞儀光電另外一條成長大道。目前瑞儀光電產品已遍及筆電、平板、手機等所有熱門產品的供應鏈，客戶群也涵括美系、韓系、日系等知名國際級大廠，營收續創佳績。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01319 role="tabpanel" aria-labelledby=tabEvent115A01319>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：2 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">中華精測科技股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 10:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 10:10 ~ 2026-09-16 11:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>富比世評選亞洲200家最佳中小企業、Deloitte評選亞洲高科技與高成長500強、天下雜誌評選2019年2000大企業、中華徵信評選2019年台灣大型企業排名TOP 5000、金融時報（FT）評選亞太地區500家成長最快的企業。</p>
+<p>中華精測 (英文簡稱CHPT) 自中華電信研究院分割設立，公司成立於2005年，致力突破傳統框架開發半導體先進測試介面技術，並匯聚M (機構)、E (電學)、C (化學)、O (光學) 等各領域人才，建構AI智動化生產製造環境，強化精進Q(品質)、C(成本)、T (技術)、D(交期)、S(服務)競爭力，成功建構出獨樹一格的「All In House」商業模式，助力半導體產業各類別客戶在日新月異的科技行業裡迅速推陳出新、共創雙贏。</p>
+<p>隨著終端產品的日新月異與產業趨勢的快速變化，以及5G世代之來臨，客戶對測試介面板之線路品質及信號速度的要求也更嚴格。本公司擁有豐富的PCB Layout設計經驗，如傳輸線、差動線、延遲線、RF、Mix等等，以及高難度的PCB製程技術，如厚板、微線、高縱橫比等，更搭配提供零組件組裝（含relay、socket與stiffener）及售後維修等Total Solution服務，已廣獲國內外各知名客戶採用與肯定，並選為主要供應商。</p>
+<p>為因應客戶不斷增加的應用需求，並確保服務的品質與能力，本公司不斷投入開發新技術與新製程，伴隨客戶共同成長。且培養工程師成為能提供客戶完整解決方案的專業角色，不論在AP、RF、Graphic、PMIC、SoC、Memory等領域，均能提供高品質之測試板及快速的技術服務，共同為台灣半導體產業之升級而努力。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01320 role="tabpanel" aria-labelledby=tabEvent115A01320>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：7 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">大立光電股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 11:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 11:10 ~ 2026-09-16 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>大立光電股份有限公司，創立於西元 1987 年，並於 2002 年在台灣證券交易所掛牌上市，為一專業光學鏡頭設計及製造商。集團總部位於台中市南屯區精密機械園區，目前在台中共有十個廠區，為全球精密光學塑膠鏡頭領導廠商。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01321 role="tabpanel" aria-labelledby=tabEvent115A01321>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：8 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">群聯電子股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 12:10 ~ 2026-09-16 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>群聯電子從 2000 年創立以來始終致力於研發與設計快閃記憶體控制晶片，從提供「全球首顆單晶片 USB（Universal Serial Bus）快閃記憶體隨身碟控制晶片」起家，持續深耕群聯的核心技術，同時將核心技術向外延伸，發展與快閃記憶體相關的應用系統產品。將核心技術以垂直與水平方向發展，提供最卓越、最創新、最完整的快閃記憶體解決方案，充分發揮群聯的核心能力。 群聯電子並於93年12月正式掛牌上櫃，在技術層面提升與營運表現皆持續穩健成長。</p>
+<p><strong>【產品與服務】</strong></p>
+<ul>
+<li>USB隨身碟控制單晶片之研發設計、製造及銷售。</li>
+<li>快閃記憶卡(SD/CF)控制晶片及系統產品之研發設計、製造及銷售。</li>
+<li>固態硬碟(SSD)控制晶片及系統產品之研發設計、製造及銷售。</li>
+<li>智慧型手機、平板電腦等行動裝置的內嵌式 Flash 應用產品之控制晶片，如 eMMC、UFS等。</li>
+</ul>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01322 role="tabpanel" aria-labelledby=tabEvent115A01322>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：6 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">工業技術研究院</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 13:10 ~ 2026-09-16 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>財團法人工業技術研究院(以下簡稱工研院)成立於1973年，為國家立法成立之國際級應用科技研發機構，以成為「世界級的研發機構，產業界的開路先鋒」為願景，主要任務為「以科技研發，帶動產業發展，創造經濟價值，增進社會福祉」，致力於加速國家工業技術發展、開創新興科技產業、協助產業技術升級。研發領域涵蓋資訊與通訊、電子與光電、機械與系統、材料化工與奈米、生醫與醫材、綠能與環境等六大技術領域。</p>
+<p>工研院成立五十多年來，累積超過3萬件專利，並新創及育成超過240家公司，包括台積電、聯電、台灣光罩、晶元光電、盟立自動化等上市櫃公司，成功推動了台灣產業的轉型與發展。工研院持續帶領台灣產業技術升級，協助建立新興科技產業，培育工業技術人才，提升企業國際競爭力。</p>
+<p>工研院以「產業創新的開路先鋒」為定位，跑在業界前面開路，勇敢投入業界還未做、不敢做、或不會做的產業科技創新。透過科技創新及整合應用，為產業創造領先產品及品牌價值。因應產業環境改變，近年來，工研院以系統、軟體、服務帶動跨領域的創新研發，持續進行智慧生活、健康樂活、永續環境等應用科技之創新；同時，強化研發成果產業化與產業服務，落實跨領域人才培育與技術整合，提供全方位研發合作與商業顧問服務、技術移轉等服務，設置開放實驗室及育成中心，積極推動及育成新創公司，加速產業技術開發及孕育新興高科技產業。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01323 role="tabpanel" aria-labelledby=tabEvent115A01323>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">中華科盛德光罩股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-16 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-16 14:10 ~ 2026-09-16 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>中華科盛德光罩股份有限公司(原名:中華凸版電子股份有限公司(TCE))是“Tekscend Photomask Corp.(簡稱TPC)全球營運基地之一，拓展半導體用光罩的生產與銷售，將在母公司Tekscend Photomask 的協助下持續支持半導體用光罩的生產活動。自成立以來，中華科盛德光罩一直是台灣領先量產最高階光罩產品的製造商，並且持續以最先進製程及技術提供客戶最佳光罩解決方案。<br><br></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01324 role="tabpanel" aria-labelledby=tabEvent115A01324>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：1 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">巨茂應用材料股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 11:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 11:10 ~ 2026-09-17 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>巨茂應用材料公司成立於2012年10月，為化工材料專業研究團隊組成，提供特殊氣體、機電、空調、自動控制、特殊氣體偵測器、特用電子材料、應用化學品生產、特用化學工程等設備產品，積極開發節能工程技術及生技工程技術，以製造 ALL-IN-ONE 的先進設備，將設備精緻化、自動化、系統化直接提供給終端客戶。一直以來, 巨茂秉持「顧客至上、永續經營」、「追求卓越、作育英才」的經營理念，以“降低操作風險”、“提高客戶滿意度”及“提昇產品附加價值”做為巨茂團隊的努力目標。</p>
+<p>公司正處於關鍵成長階段，預計於2026年底完成興櫃，並於2027年底完成上市櫃掛牌，目前正積極擴編關鍵人才，誠摯邀請具專業與企圖心的夥伴加入，一同參與公司成長與轉型的重要歷程。</p>
+<p><strong>【企業理念】</strong></p>
+<ul>
+<li>深耕半導體供應鏈，具產業發展前景<br>加入高科技產業鏈，與產業趨勢同步成長。</li>
+<li>專業技術導向，累積核心能力<br>從工程施工、設備維護到系統整合，培養市場競爭力。</li>
+<li>穩定制度與人才培育並重<br>完善制度、透明管理、重視人才發展。</li>
+<li>巨茂應材奉行“誠實、合作、卓越、品質、共享”的經營理念。</li>
+</ul>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01325 role="tabpanel" aria-labelledby=tabEvent115A01325>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：6 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">景碩科技股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 12:10 ~ 2026-09-17 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01326 role="tabpanel" aria-labelledby=tabEvent115A01326>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：10 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">瑞昱半導體股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 13:10 ~ 2026-09-17 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>瑞昱成立於1987年，憑藉著7位創始工程師的熱情與毅力，走過風雨飄搖的草創時期，從20個人的公司拓展為今日達7,300人以上規模的國際知名IC專業設計公司。39年來，我們不僅堅持信念，努力執著鑽研，更洞悉市場需求，因而造就今日的瑞昱。</p>
+<p>瑞昱以積體電路產品(IC)之研發與設計為企業定位，從產品研發、設計、測試到銷售，秉持求新求變的原則，達成「新技術、新產品、新應用、新價值與新市場」的目標。</p>
+<p>瑞昱成功開發出多種領域的應用積體電路，產品線橫跨通訊網路、電腦週邊、多媒體等技術，與世界先進產業主流並駕齊驅。瑞昱自創立至今，一直維持穩定的成長，2024年營收達到新台幣1,133.9億元，締造亮麗佳績，更證明瑞昱產品深獲市場肯定！</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01327 role="tabpanel" aria-labelledby=tabEvent115A01327>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：5 / 70<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">威聯通科技股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >學務處2樓會議室</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-17 14:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-17 14:10 ~ 2026-09-17 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">70</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>QNAP 命名源自於高品質網路設備製造商（Quality Network Appliance Provider），我們致力研發軟體應用，優化硬體設計，並設立自有生產線以提供全面而先進的科技解決方案。QNAP 專注於儲存、網通及智慧視訊產品創新，透過軟體訂閱制及多元化服務管道建構嶄新的科技生態圈。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01329 role="tabpanel" aria-labelledby=tabEvent115A01329>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：13 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">台灣美光記憶體股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教學研究大樓羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-18 11:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 11:10 ~ 2026-09-18 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>台灣美光是美商美光科技在台子公司，成立於1978年，是全球前三大記憶體製造商，總部設立於美國，並分別於台灣、日本、新加坡、中國、歐洲等地設有研發設計或製造據點；全球員工超過3萬人。 台灣美光跨足半導體後段封測領域，以領先之姿，帶領亞洲半導體產業持續向上，讓世界供應鏈持續向台灣匯聚能量。台灣美光升級為集合晶圓製造、封裝測試於一體，並有研發團隊進駐的DRAM卓越製造中心。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01330 role="tabpanel" aria-labelledby=tabEvent115A01330>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：12 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">廣達電腦股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教學研究大樓羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-18 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 12:10 ~ 2026-09-18 13:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p>不一樣的廣達引領趨勢、突破創新，帶領世界邁向雲端、創造未來！</p>
+<p>1988年成立，領先群倫的技術與卓越的研發團隊，雄踞高科技市場領導地位。廣達是全球頂尖科技品牌最重要的研發設計夥伴。</p>
+<p>從全球最大的筆記型電腦、AIO、到伺服器，廣達持續創新與突破。站在雲端制高點，致力於AI與5G戰略全球布局，開拓全方位的AI產品線，涉足智慧醫療、智慧交通、智慧製造。</p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01331 role="tabpanel" aria-labelledby=tabEvent115A01331>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：11 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">世界先進積體電路股份有限公司</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教學研究大樓羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-01 10:00 ~ 2026-09-18 13:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-18 13:10 ~ 2026-09-18 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								多元視野 :  0.33小時、自我了解 :  0.33小時、規劃行動 :  0.34小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong>企業簡介</strong></p>
+<p><strong>【技術初探】</strong></p>
+<p>世界先進充分運用既有技術核心專長，配合產業脈動及市場成長需求，持續增加產品及製程研發上的投資，目前持續研發的製程技術包括高壓製程（High Voltage）、超高壓製程（Ultra High Voltage）、BCD(Bipolar CMOS DMOS)製程、SOI(Silicon on Insulator)、分離式元件（Discrete）、邏輯製程（Logic）、混合訊號製程(Mixed-Signal)、類比訊號製程(Analog)、HPA (High Precision Analog) 製程，以及嵌入式記憶體製程（Embedded Memory）技術等，以協助提昇客戶在全球市場的競爭力。</p>
+<p>為建立矽智財(IP)方面的研發能力，我們除持續與提供矽智財的策略伙伴合作外，也不斷加強提昇矽智財服務的能力。目前可提供的矽智財包括：標準單元庫（Standard cell library）、 靜態隨機儲存器（SRAM）、 一次性可程式化記憶體（One-time Programmable Memory） 、 多次性可程式化記憶體（Multiple-time Programmable Memory）、 電子保險絲 （Electrical Fuse）、 功率線路單元（Power Phantom Cell）等。另外，藉由與IP專業策略伙伴合作，本公司將可進一步提供客戶特殊積體電路所需之IPs。</p>
+<p><strong>【企業理念】</strong></p>
+<p>世界先進目前員工人數約有5,400人，我們堅持以「客戶服務為導向」的經營理念，持續加強對特殊積體電路晶圓代工客戶的專業服務。而為提供全球客戶最佳支援服務，我們除在台灣設立總公司外，於全球各主要IC據點皆設有銷售及服務據點。</p>
+<p>本公司在顯示器相關驅動 IC ，電源管理 IC 和分離式功率元件的營運已見績效，為分散產品及市場集中度，降低營運風險，並且，同時往高毛利的市場耕耘，除既有的高壓類比、BCD、超高壓製程外，本公司持續加速感測元件、指紋辨識IC、高功率電源管理IC和嵌入式記憶體平台等計畫的執行，以因應節能減碳時代的來臨，及滿足車用電子和物聯網市場需求，相信未來都將有助於公司營運的推升。此外引進更多IDM客戶群，提高國外客戶比重的計畫也將持續進行，希望藉由深化客戶長期夥伴關係以確保特殊晶圓代工的領導地位，並成為高壓及功率半導體製程全球晶圓代工的領導廠商之一。</p>
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：bd40e8d1，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>

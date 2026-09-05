@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745236"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1782900153" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138642" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610760" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440156" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138642" />	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099845"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+					</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">2027台積電預辦登積計畫：預聘暨研發替代役招募－企業說明會專場</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">學生事務處職涯發展中心</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">李家華</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">chiahua9131@ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>學生：</label>
+													<span>【四年級】</span>
+													<span>【五年級】</span>
+													<span>【六年級】</span>
+													<span>【七年級】</span>
+													<span>【全部學生】</span>
+													<span>【全部學生】</span>
+													<span>【全部學生】</span>
+													<span>【全部學生】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p>2027台積電預辦登積計畫：預聘暨研發替代役招募系列活動，<wbr>開跑囉～</wbr></p>
+<p>歡迎「志同道合」的夥伴，一起加入台積、共創奇蹟！</p>
+<p>❤️‍🔥中央大學企業說明會：</p>
+<ul>
+<li>時間：2026/9/21(一)　16：10 - 17：00</li>
+<li>地點：教研大樓 羅家倫講堂</li>
+<li>報名資格：2027年應屆畢業及碩、博士生</li>
+<li>報名方式：完成 Portal 報名系統 ➡️ 登入<a href="https://careers.tsmc.com/events/Eventdetail?jobId=22796&amp;source=School+Dept&amp;tags=ao+2027_ep_dept" target="_blank" rel="noopener noreferrer">台積電網頁</a>填寫相關資訊</li>
+<li>註：參加活動提供服學及安心時數</li>
+</ul>
+<p> </p>
+<p>❤️‍🔥同步登積  *\ 徵才攤位活動 /*：</p>
+<ul>
+<li>時間：2026/9/21(一)　10：00 - 16：00</li>
+<li>地點：機械系前廣場</li>
+<li>報名資格：無</li>
+<li>報名方式：免預先報名，人來就好👍</li>
+<li>註：此活動不提供時數</li>
+</ul>
+<p> </p>
+<hr>
+<p>全台～台積電預辦登積計畫內容如下：</p>
+<p><img class="an1" draggable="false" src="https://fonts.gstatic.com/s/e/notoemoji/17.0/1f44d/32.png" alt="👍" width="25" height="25" loading="lazy" data-emoji="👍" aria-label="👍"> <strong>計畫對象：</strong>2027年應屆畢業之碩、博士生</p>
+<p><img class="an1" draggable="false" src="https://fonts.gstatic.com/s/e/notoemoji/17.0/1f44d/32.png" alt="👍" width="25" height="25" loading="lazy" data-emoji="👍" aria-label="👍"> <strong>主修科系：</strong>主修半導體、電機、電子、光電、電信、物理、<wbr>材料、化學、化工、機械、資工、資管、工工、工管、環工、土木、<wbr>其他理工科系、人資、商管等相關領域</wbr></wbr></p>
+<p><img class="an1" draggable="false" src="https://fonts.gstatic.com/s/e/notoemoji/17.0/1f44d/32.png" alt="👍" width="25" height="25" loading="lazy" data-emoji="👍" aria-label="👍"> <strong>徵才時程：</strong></p>
+<p>•  <strong>申請日期：</strong>即日起 – 2026/10/31</p>
+<p>•  <strong>面談日期：</strong>即日起 – 2026/12/31</p>
+<p> </p>
+<p><strong>▼▼▼ 2027</strong><strong>台積電預辦登積計畫：<wbr>預聘暨研發替代役招募系列活動</wbr></strong><strong> ▼▼▼</strong></p>
+<p><img class="an1" draggable="false" src="https://fonts.gstatic.com/s/e/notoemoji/17.0/1f4cc/32.png" alt="📌" width="25" height="25" loading="lazy" data-emoji="📌" aria-label="📌"> <strong>徵才攤位活動</strong><strong>► </strong><a id="m_-1571433909681243726OWAd4e8f1ab-8372-a05b-2344-766086018423" title="Js" href="https://careers.tsmc.com/events/Eventdetail?jobId=22806" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://careers.tsmc.com/events/Eventdetail?jobId%3D22806&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw3IW4WmonNfZo8iUYnugTjT"><strong><u>(</u></strong></a><a id="m_-1571433909681243726OWA73e84848-372b-ff6e-8b96-ca5a0760cae5" title="Js" href="https://careers.tsmc.com/events/Eventdetail?jobId=22806" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://careers.tsmc.com/events/Eventdetail?jobId%3D22806&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw3IW4WmonNfZo8iUYnugTjT"><strong><u>場次點我</u></strong></a><a id="m_-1571433909681243726OWAd9ada64b-df63-99f4-226e-017f4a027160" title="Js" href="https://careers.tsmc.com/events/Eventdetail?jobId=22806" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://careers.tsmc.com/events/Eventdetail?jobId%3D22806&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw3IW4WmonNfZo8iUYnugTjT"><strong><u>)</u></strong></a></p>
+<p>TSMC學長姐對談，分享職場經驗與工作內容、<wbr>技能需求等職涯發展建議。</wbr></p>
+<p><img class="an1" draggable="false" src="https://fonts.gstatic.com/s/e/notoemoji/17.0/1f4cc/32.png" alt="📌" width="25" height="25" loading="lazy" data-emoji="📌" aria-label="📌"> <strong>徵才說明會</strong><strong>► </strong><a id="m_-1571433909681243726OWAd2b7c6dd-2ff3-c337-d2d7-5f25cb508130" title="Js" href="https://bit.ly/2027AO_s" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://bit.ly/2027AO_s&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw1c6hmeToZyOpcwJJAXRZNB"><strong><u>(</u></strong></a><a id="m_-1571433909681243726OWAa71a16f4-9936-32fa-eb6f-0db042305b6d" title="Js" href="https://bit.ly/2027AO_s" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://bit.ly/2027AO_s&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw1c6hmeToZyOpcwJJAXRZNB"><strong><u>報名點我</u></strong></a><a id="m_-1571433909681243726OWAd04d1c20-426f-e706-1f20-cfa7cf7d4b8f" title="Js" href="https://bit.ly/2027AO_s" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://bit.ly/2027AO_s&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw1c6hmeToZyOpcwJJAXRZNB"><strong><u>)</u></strong></a></p>
+<p>掌握產業趨勢、職缺資訊、員工福利及投遞履歷Tips！</p>
+<p><strong><img id="m_-1571433909681243726圖片_x0020_1" class="CToWUd" src="https://mail.google.com/mail/u/0?ui=2&amp;ik=8de61c3f1f&amp;attid=0.0.1&amp;permmsgid=msg-f:1875311556914127418&amp;th=1a0671ecd90d223a&amp;view=fimg&amp;fur=ip&amp;permmsgid=msg-f:1875311556914127418&amp;sz=s0-l75-ft&amp;attbid=ANGjdJ9SDYRHLm-pz4Krcaw3-jd_sLRHu1LDmAyaf5QfqWfBvdlt1lvhoR1YMIsf_34IbyEvG3fimVtGSm3MyEeQH9vbYFi27UHx5GRUlxANwdbrDMl4dtzBrLaZJDY&amp;disp=emb&amp;zw" width="16" height="16" data-image-whitelisted="" data-bit="iit"></strong><strong>履歷傳送門：</strong><a id="m_-1571433909681243726OWA11a7ccbc-0afc-0fe2-a008-06d4d2850cc3" title="Js" href="https://careers.tsmc.com/zh_TW/careers/JobDetail?jobId=22573&amp;source=School+Dept&amp;tags=ao+2027_ep_dept" target="_blank" rel="noopener noreferrer" data-saferedirecturl="https://www.google.com/url?q=https://careers.tsmc.com/zh_TW/careers/JobDetail?jobId%3D22573%26source%3DSchool%2BDept%26tags%3Dao%2B2027_ep_dept&amp;source=gmail&amp;ust=1788569541376000&amp;usg=AOvVaw0QXRYvuQKuGvR1LPzbAt84"><strong><u>請點我</u></strong></a></p>
+<p><strong> </strong></p>
+<p>▋歡迎志同道合的你，一起加入台積 Together We Grow</p>
+<p>▋世界上的每一個夢，都由我們來圓夢 Unleash Innovation. Amplify Potential.</p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01418 data-bs-toggle="tab" data-tooltip="tooltip" title="2027台積電預辦登積計畫：預聘暨研發替代役招募－企業說明會專場" href=#event115A01418 role="tab" aria-controls=event115A01418 aria-selected="true">
+						2027台積電預辦登積計畫：預聘暨研發替代役招募－企業說明會專場
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01418 role="tabpanel" aria-labelledby=tabEvent115A01418>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 170<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">2027台積電預辦登積計畫：預聘暨研發替代役招募－企業說明會專場</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >教研大樓-羅家倫講堂</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-07 12:00 ~ 2026-09-21 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-09-21 16:10 ~ 2026-09-21 17:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">170</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								自我了解 :  0.5小時、規劃行動 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：bd40e8d1，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>
