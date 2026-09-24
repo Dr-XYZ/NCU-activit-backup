@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745236"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1788834475" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138642" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610760" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440156" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138642" />	<link rel="stylesheet" href="https://cis.ncu.edu.tw/iNCU/css/choices.min.css" />
+	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099845"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/choices.min.js"></script>
+
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+				
+			</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+	<div class="container">
+		<img src="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery/showImage/pp9-fIeEqqZ5mqGVtcag" class="mx-auto d-block" style="max-height:800px; max-width:100%;" />
+		<hr />
+	</div>
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">2026年流感及新冠疫苗接種(第一階階段)</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">學生事務處衛生保健組</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">秦藝瑄</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">chin228@ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>教職員：</label>
+													<span>【全部教職員】</span>
+							
+					</div>
+									<div>
+						<label>學生：</label>
+													<span>【全部學生】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p><span style="font-size: 18pt; color: #e03e2d;"><strong>請注意是否符合公費流感疫苗接種資格，若不符合公費資格，請報名自費流感疫苗，謝謝</strong><strong><span lang="EN-US">!</span></strong></span></p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01700 data-bs-toggle="tab" data-tooltip="tooltip" title="2026流行性感冒公費疫苗" href=#event115A01700 role="tab" aria-controls=event115A01700 aria-selected="true">
+						2026流行性感冒公費疫苗
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01704 data-bs-toggle="tab" data-tooltip="tooltip" title="2026流行性感冒自費疫苗-伏適流(GSK)Fluarix Tetra (NT$1000)" href=#event115A01704 role="tab" aria-controls=event115A01704 aria-selected="true">
+						2026流行性感冒自費疫苗-伏適流(GSK)Fluarix Tetra (NT$1000)
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01705 data-bs-toggle="tab" data-tooltip="tooltip" title="2026流行性感冒自費疫苗-輔流威適(東洋) Flucelvax Quad(NT$1400)" href=#event115A01705 role="tab" aria-controls=event115A01705 aria-selected="true">
+						2026流行性感冒自費疫苗-輔流威適(東洋) Flucelvax Quad(NT$1400)
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01707 data-bs-toggle="tab" data-tooltip="tooltip" title="2026流行性感冒自費疫苗-AZ FluMist 能伏鼻鼻噴式流感疫苗(NT$1500)" href=#event115A01707 role="tab" aria-controls=event115A01707 aria-selected="true">
+						2026流行性感冒自費疫苗-AZ FluMist 能伏鼻鼻噴式流感疫苗(NT$1500)
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01709 data-bs-toggle="tab" data-tooltip="tooltip" title="2026公費新冠疫苗-莫德納(Moderna) Spikevax COVID-19 疫苗" href=#event115A01709 role="tab" aria-controls=event115A01709 aria-selected="true">
+						2026公費新冠疫苗-莫德納(Moderna) Spikevax COVID-19 疫苗
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01700 role="tabpanel" aria-labelledby=tabEvent115A01700>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：60 / 180<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">2026流行性感冒公費疫苗</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >志道樓1樓大活動室1st-floor Grand Hall, Zhi Dao Hall</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-22 12:00 ~ 2026-10-08 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-10-12 13:00 ~ 2026-10-12 14:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">180</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								健康管理 :  2小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p class="MsoNormal"><strong><span lang="EN-US">2026</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">年</span><span lang="EN-US">10</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">月12</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">日</span><span lang="EN-US">(</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">星期一</span><span lang="EN-US">)13:00~14:30</span></strong></p>
+<p class="MsoNormal"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">志道樓</span><span lang="EN-US">1</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">樓大活動室</span></strong></p>
+<p class="MsoNormal"><span lang="EN-US">Oct 12, 2025 (Monday)13:00~14:30</span></p>
+<p class="MsoNormal"><span lang="EN-US">Large Activity Room, 1st Floor, Zhi-dao Hall</span></p>
+<p class="MsoNormal"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">第一階段公費疫苗施打對象</span></strong></p>
+<ul style="list-style-type: square;">
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">醫事及衛生防疫相關人員</span> </strong></li>
+<li style="font-weight: bold;"><strong><span lang="EN-US">65</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">歲以上者(民國50年12月31日前生)</span></strong></li>
+<li style="font-weight: bold;"><strong><span lang="EN-US">55</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">歲以上原住民</span> </strong></li>
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">安養、長期照顧（服務）等機構之受照顧者及其所屬工作人員</span> </strong></li>
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">滿</span><span lang="EN-US">6</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">個月以上至國小入學前幼兒(<span style="color: #e03e2d;">攜帶兒童健康手冊</span>)</span></strong></li>
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">孕婦(<span style="color: #e03e2d;">攜帶婦幼健康手冊，需影印封面</span>)</span></strong></li>
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">具有潛在疾病者，包括</span><span lang="EN-US">19-64</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">歲高風險慢性病人(具糖尿病、慢性肝病(含肝硬化)、心血管疾病、慢性肺病、腎臟疾病及免疫低下(HIV感染者)等疾病</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">(<span style="color: #e03e2d;">請提供就醫紀錄影本或領藥影本</span>)</span></strong></li>
+<li style="font-weight: bold;"><strong><span lang="EN-US">BMI</span><span style="font-family: '新細明體',serif; mso-bidi-font-family: 新細明體;">≧</span><span lang="EN-US">30</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">者。</span></strong></li>
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">罕見疾病患者及重大傷病患者(<span class="fontstyle0" style="color: #e03e2d;">健保快易通 APP 記錄或領有重大傷病證明紙卡者<span style="color: #000000;">)</span></span></span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;"><br></span></strong></li>
+<li style="font-weight: bold;"><strong>6個月內嬰兒之雙親或實際扶養者<span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">(<span style="color: #e03e2d;">攜帶嬰兒出生證明或戶口名簿、照顧者之身分證及簽立簽結書，需影印</span>)</span> </strong></li>
+<li style="font-weight: bold;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">幼兒園托育人員、托育機構專業人員及居家托育人員（保母）(<span style="color: #e03e2d;">需開立在職證明</span>)</span></strong></li>
+<li style="font-weight: bold;"><strong> <span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">國小、國中、高中、高職、五專一至三年級學生(攜帶補接種通知單及健保卡)</span></strong></li>
+<li style="font-weight: bold;"><strong> <span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">禽畜相關及動物防疫相關人員</span></strong></li>
+</ul>
+<p class="MsoNormal"><span lang="EN-US">Phase 1 Vaccination Recipients</span></p>
+<ul style="list-style-type: square;">
+<li class="MsoNormal"><span lang="EN-US">Medical, health, and epidemic prevention personnel</span></li>
+<li class="MsoNormal"><span lang="EN-US">Individuals aged 65 and above (born on or before December 31, 1961)</span></li>
+<li class="MsoNormal">Indigenous people aged 55 and above</li>
+<li class="MsoNormal">Care recipients and staff of nursing homes and long-term care (service) facilities</li>
+<li class="MsoNormal">Children from 6 months old to pre-elementary school age (must bring the Child Health Manual)</li>
+<li class="MsoNormal">Pregnant women (must bring the Maternal and Child Health Booklet; a photocopy of the cover is required)</li>
+<li class="MsoNormal">Individuals with underlying medical conditions, including high-risk chronic patients aged 19-64 with diseases such as diabetes, chronic liver disease (including cirrhosis), cardiovascular disease, chronic lung disease, kidney disease, and immunocompromised conditions (e.g., HIV patients) (please provide a photocopy of medical records or prescription receipts)</li>
+<li class="MsoNormal">Individuals with a BMI ≥ 30</li>
+<li class="MsoNormal">Patients with rare diseases and catastrophic illnesses (must have records in the NHI Express APP or hold a physical catastrophic illness certificate card)</li>
+<li class="MsoNormal">Parents or actual guardians of infants under 6 months old (must bring the infant's birth certificate; a photocopy is required)</li>
+<li class="MsoNormal">Preschool childcare personnel, childcare facility professionals, and in-home childcare providers/nannies (proof of employment is required)</li>
+<li class="MsoNormal">Elementary, junior high, senior high, and vocational high school students, as well as students in grades 1 to 3 of five-year junior colleges (must bring the make-up vaccination notice and NHI card)</li>
+<li class="MsoNormal">Poultry/livestock-related workers and animal epidemic prevention personnel</li>
+</ul>
+<p class="MsoNormal"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">注意事項</span><span lang="EN-US">:</span></strong></p>
+<p class="MsoNormal"><strong><span lang="EN-US">1.</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">公費疫苗施打品牌依據桃園市衛生局當日供貨為準。</span></strong></p>
+<p class="MsoNormal"><strong><span lang="EN-US">2.</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">公費流感疫苗施打對象當日，可以同時接受新冠疫苗注射。</span></strong></p>
+<p class="MsoNormal"><strong><span lang="EN-US">3.</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">境外人士要有居留證及健保卡，並符合公費資格，才可以施打公費疫苗。</span></strong></p>
+<p class="MsoNormal"><strong><span lang="EN-US">4.</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">注射新冠疫苗不用攜帶小黃卡。</span></strong></p>
+<p class="MsoNormal"><span lang="EN-US">Important Notes:</span></p>
+<ol style="margin-top: 0cm;" start="1" type="1">
+<li class="MsoNormal" style="mso-list: l0 level1 lfo1; tab-stops: list 36.0pt;"><span lang="EN-US">The brand of the government-funded vaccine will depend on the supply provided by the Taoyuan City Health Bureau on the day.</span></li>
+<li class="MsoNormal" style="mso-list: l0 level1 lfo1; tab-stops: list 36.0pt;"><span lang="EN-US">Eligible recipients of the government-funded flu vaccine can also receive the COVID-19 vaccine on the same day.</span></li>
+<li class="MsoNormal" style="mso-list: l0 level1 lfo1; tab-stops: list 36.0pt;"><span lang="EN-US">Foreign nationals must have a residence permit and National Health Insurance card, and meet the criteria for government-funded vaccines in order to receive the free vaccine.</span></li>
+<li class="MsoNormal" style="mso-list: l0 level1 lfo1; tab-stops: list 36.0pt;"><span lang="EN-US">The COVID-19 vaccine can be administered without the need to bring the yellow vaccination card.</span></li>
+</ol>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01704 role="tabpanel" aria-labelledby=tabEvent115A01704>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：52 / 80<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">2026流行性感冒自費疫苗-伏適流(GSK)Fluarix Tetra (NT$1000)</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >志道樓1樓大活動室1st-floor Grand Hall, Zhi Dao Hall</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-22 12:00 ~ 2026-10-08 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-10-12 13:00 ~ 2026-10-12 14:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">80</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								健康管理 :  2小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<table style="border-collapse: collapse; width: 96.4208%; height: 73px;" border="1"><colgroup><col style="width: 25.1692%;"><col style="width: 25.1692%;"><col style="width: 25.1692%;"><col style="width: 24.5946%;"></colgroup>
+<tbody>
+<tr style="height: 36px;">
+<td style="text-align: center;">
+<p>產品名稱</p>
+<p>Product Name</p>
+</td>
+<td style="text-align: center;">
+<p>製造方式</p>
+<p>Manufacturing Method</p>
+</td>
+<td style="text-align: center;">
+<p>製造國家</p>
+<p>Country of Manufacture</p>
+</td>
+<td style="text-align: center;">
+<p>金額</p>
+<p>Amount</p>
+</td>
+</tr>
+<tr style="text-align: center; height: 36px;">
+<td><span class="fontstyle0">伏適流(GSK)</span></td>
+<td>
+<p>雞蛋培養</p>
+<p><strong><span lang="EN-US">Egg-based culture</span></strong></p>
+</td>
+<td>
+<p>德國</p>
+<p><strong>Germany</strong></p>
+</td>
+<td>
+<p>1000</p>
+<p><strong><span lang="EN-US">NT$1000</span></strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="MsoNormal"><strong><span lang="EN-US">2026</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">年</span><span lang="EN-US">10</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">月</span><span lang="EN-US">12</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">日</span><span lang="EN-US">(</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">星期一</span><span lang="EN-US">)13:00~14:30</span></strong></p>
+<p class="MsoNormal"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">志道樓</span><span lang="EN-US">1</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">樓大活動室</span></strong></p>
+<p class="MsoNormal"><span lang="EN-US">Oct 12, 2026(Monday)13:00~14:30</span></p>
+<p class="MsoNormal"><span lang="EN-US">Large Activity Room, 1st Floor, Zhi-dao Hall</span></p>
+<p class="MsoNormal"> </p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01705 role="tabpanel" aria-labelledby=tabEvent115A01705>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：14 / 30<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">2026流行性感冒自費疫苗-輔流威適(東洋) Flucelvax Quad(NT$1400)</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >志道樓1樓大活動室1st-floor Grand Hall, Zhi Dao Hall</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-22 12:00 ~ 2026-10-08 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-10-12 13:00 ~ 2026-10-12 14:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">30</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								健康管理 :  2小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p class="MsoNormal"><strong><span lang="EN-US">2026</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">年</span><span lang="EN-US">10</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">月</span><span lang="EN-US">12</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">日</span><span lang="EN-US">(</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">星期一</span><span lang="EN-US">)13:00~14:30</span></strong></p>
+<p class="MsoNormal"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">志道樓</span><span lang="EN-US">1</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">樓大活動室</span></strong></p>
+<p class="MsoNormal"><span lang="EN-US">Oct 12, 2026 (Monday)13:00~14:30</span></p>
+<p class="MsoNormal"><span lang="EN-US">Large Activity Room, 1st Floor, Zhi-dao Hall</span></p>
+<p class="MsoNormal"><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">輔流威適</span><span lang="EN-US">(</span><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">東洋</span><span lang="EN-US">) Flucelvax Quad(NT$1400)</span></p>
+<p class="MsoNormal"><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;"><strong>細胞培養</strong></span><span lang="EN-US">:Cell-based culture</span></p>
+<p class="MsoNormal"><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">製造商Country of Manufacture：德國Germany</span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01707 role="tabpanel" aria-labelledby=tabEvent115A01707>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：1 / 20<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">2026流行性感冒自費疫苗-AZ FluMist 能伏鼻鼻噴式流感疫苗(NT$1500)</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >志道樓1樓大活動室1st-floor Grand Hall, Zhi Dao Hall</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-22 12:00 ~ 2026-10-08 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-10-12 13:00 ~ 2026-10-12 14:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">20</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								健康管理 :  2小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p class="MsoNormal"><strong><span lang="EN-US">2026</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">年</span><span lang="EN-US">10</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">月</span><span lang="EN-US">12</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">日</span><span lang="EN-US">(</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">星期一</span><span lang="EN-US">)13:00~14:30</span></strong></p>
+<p class="MsoNormal"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">志道樓</span><span lang="EN-US">1</span></strong><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">樓大活動室</span></strong></p>
+<p class="MsoNormal"><span lang="EN-US">Oct 12, 2026 (Monday)13:00~14:30</span></p>
+<p class="MsoNormal"><span lang="EN-US">Large Activity Room, 1st Floor, Zhi-dao Hall</span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-family: 標楷體;">FluMist </span><span style="font-family: 標楷體;">能伏鼻鼻噴式流感疫苗是活性減毒流感疫苗（<span lang="EN-US">LAIV</span>）(NT$1500)，以鼻噴方式給藥。</span></p>
+<p class="MsoNormal"><span style="font-family: 標楷體;">製造地資訊：</span></p>
+<p class="MsoNormal"><span style="font-family: 標楷體;">研發單位：<span lang="EN-US">MedImmune, LLC</span>（<span lang="EN-US">AstraZeneca </span>子公司）</span></p>
+<p class="MsoNormal"><span style="font-family: 標楷體;">主要製造地點：美國</span></p>
+<p class="MsoNormal"><span style="font-family: 標楷體;">品牌名稱：<span lang="EN-US">FluMist Quadrivalent</span>（三價鼻噴流感疫苗）</span></p>
+<p class="MsoNormal"><span style="font-family: 標楷體;">適用對象</span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-family: 標楷體;">• </span><span style="font-family: 標楷體;">建議使用：<span lang="EN-US">2歲以上至</span>未滿<span lang="EN-US">18</span>歲的兒童及青少年</span></p>
+<p class="MsoNormal"><span style="font-family: 標楷體;">不適合使用：</span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-family: 標楷體;">• 2–5</span><span style="font-family: 標楷體;">歲有氣喘的幼兒</span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-family: 標楷體;">• </span><span style="font-family: 標楷體;">免疫功能低下者</span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-family: 標楷體;">• </span><span style="font-family: 標楷體;">對蛋過敏且曾有嚴重反應者</span></p>
+<p class="MsoNormal"><span lang="EN-US" style="font-family: 標楷體;">• </span><span style="font-family: 標楷體;">患雷氏症候群且正在使用阿斯匹靈或水楊酸類藥物的兒童與青少年</span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01709 role="tabpanel" aria-labelledby=tabEvent115A01709>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：14 / 80<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">2026公費新冠疫苗-莫德納(Moderna) Spikevax COVID-19 疫苗</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9"></dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >志道樓1樓大活動室1st-floor Grand Hall, Zhi Dao Hall</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-22 12:00 ~ 2026-10-08 12:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-10-12 13:00 ~ 2026-10-12 14:30</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">80</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															本場次不提供時數
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								本場次不提供時數
+															</dd>
+						
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								健康管理 :  2小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span style="font-size: 12pt; line-height: 115%;">主要成分：含有</span><span lang="EN-US" style="font-size: 12pt; line-height: 115%;"> SARS-CoV-2 </span><span style="font-size: 12pt; line-height: 115%;">變異株棘蛋白之單價</span><span lang="EN-US" style="font-size: 12pt; line-height: 115%;"> mRNA </span><span style="font-size: 12pt; line-height: 115%;">疫苗</span><span style="font-size: 12pt; line-height: 115%;">。</span></span></p>
+<p class="MsoNormal"><span style="color: #000000; font-family: arial, helvetica, sans-serif;">接種對象：</span></p>
+<ul style="list-style-type: square;">
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span lang="EN-US">65</span>歲以上民眾</span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span lang="EN-US">55</span>歲以上原住民(<span style="color: #e03e2d;">出示戶籍名簿或戶口謄本等可證明原住民族身分之文件</span>)</span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;">安養、長期照顧(服務)等機構之受照顧者及其所屬工作人員</span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;">孕婦：已領取國民健康署「孕婦健康手冊」之懷孕婦女 ，若尚未發給孕婦健康手冊 ，則可檢附診斷證明書</span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;">滿 6 個月以上高風險對象，括含符合公費流感疫苗高風險對象條件(高風險慢性病人、BMI≧30者、罕見病病患者及重大傷病患者) ，以及結核病、失能(注意力不足及過動症、腦性麻痺、先天性缺陷、發展或學習障礙、脊髓損傷) 、精神病病(情緒障礙、思覺失調症)、失智症患</li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;">醫事及衛生防疫相關人員</span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;">幼兒園托育人員 托育機構專業人員及居家托育人員<span lang="EN-US">(</span>保母<span lang="EN-US">)(<span style="color: #e03e2d;">開立在職證明</span>)</span></span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;"><span style="color: #000000; font-family: arial, helvetica, sans-serif;">6 個月內嬰兒之雙親或實際扶養者：<span style="color: #e03e2d;"><strong><span style="font-family: '新細明體',serif; mso-ascii-font-family: Aptos; mso-ascii-theme-font: minor-latin; mso-fareast-theme-font: minor-fareast; mso-hansi-font-family: Aptos; mso-hansi-theme-font: minor-latin;">攜帶嬰兒出生證明或戶口名簿、照顧者之身分證及簽立簽結書，需影印</span></strong></span></span></li>
+<li class="MsoNormal" style="font-family: arial, helvetica, sans-serif;">從未接種 COVID-19 疫苗之滿 6 個月至未滿 6 歲幼兒</li>
+</ul>
+<p class="MsoNormal"> </p>
+<p class="MsoNormal"><span style="color: #000000; font-family: arial, helvetica, sans-serif;"><span lang="EN-US" style="font-size: 12pt; line-height: 115%;">Eligible Groups for Vaccination</span></span></p>
+<ul style="list-style-type: square;">
+<li>
+<p data-path-to-node="1,0,0">Individuals aged 65 and above</p>
+</li>
+<li>Indigenous people aged 55 and above (must present a household certificate or household registration transcript as proof of indigenous status)</li>
+<li>
+<p data-path-to-node="1,2,0">Care recipients and staff of nursing homes and long-term care (service) facilities</p>
+</li>
+<li>
+<p data-path-to-node="1,3,0">Pregnant women: Pregnant women who have received the "Maternal and Child Health Booklet" from the Health Promotion Administration; if the booklet has not yet been issued, a medical diagnostic certificate can be provided</p>
+</li>
+<li>
+<p data-path-to-node="1,4,0">High-risk individuals aged 6 months and above, including those who meet the high-risk criteria for the publicly funded influenza vaccine (high-risk chronic patients, individuals with a BMI ≥ 30, patients with rare diseases, and patients with catastrophic illnesses), as well as individuals with tuberculosis, disabilities (Attention Deficit Hyperactivity Disorder (ADHD), cerebral palsy, congenital defects, developmental or learning disabilities, spinal cord injuries), psychiatric disorders (mood disorders, schizophrenia), and dementia patients</p>
+</li>
+<li>
+<p data-path-to-node="1,5,0">Medical, health, and epidemic prevention personnel</p>
+</li>
+<li>
+<p data-path-to-node="1,6,0">Preschool childcare personnel, childcare facility professionals, and in-home childcare providers/nannies (proof of employment is required)</p>
+</li>
+<li>
+<p data-path-to-node="1,7,0">Parents or actual guardians of infants under 6 months old: Must hold the infant's birth certificate or a household registration certificate showing the completed newborn registration</p>
+</li>
+<li>
+<p data-path-to-node="1,8,0">Children aged 6 months to under 6 years old who have never received a COVID-19 vaccine</p>
+</li>
+</ul>
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：d24512cf，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>
