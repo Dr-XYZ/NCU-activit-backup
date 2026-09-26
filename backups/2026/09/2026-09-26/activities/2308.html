@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=0.8,maximum-scale=2.0,user-scalable=no" />
+	
+	<title>國立中央大學 - 服務櫃台 (iNCU)</title>
+	<link rel="shortcut icon" href="https://cis.ncu.edu.tw/iNCU/images/favicon.png" />
+	
+		<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/bootstrap-icons-v1.13.1.min.css?v=1769745236"> 	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/smart_wizard_theme_dots.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/component-custom-switch.min.css">	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/typeaheadjs.css" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/flatpickr.min.css" />  
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/body.css?v=1788834475" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/card.css?v=1769138642" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/nav.css?v=1763610760" />	
+	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/fm-card.css?v=1786440156" />	<link rel="stylesheet" type="text/css" href="https://cis.ncu.edu.tw/iNCU/css/main.css?v=1769138642" />	<link rel="stylesheet" href="https://cis.ncu.edu.tw/iNCU/css/choices.min.css" />
+	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/cleave.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery-3.7.1.min.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/bootstrap.bundle.min.js"></script>
+ 	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.jquery.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/typeahead/typeahead.bundle.js"></script>		<script src="https://cis.ncu.edu.tw/iNCU/js/flatpickr.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.validate.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.blockUI.js"></script>
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.smartWizard.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/nav.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/blankTools.js?v=1733723617"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/tools.js?v=1775099845"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.rwdImageMaps.min.js"></script>	
+	<script src="https://cis.ncu.edu.tw/iNCU/js/chart.umd.js"></script>	
+		<script src="https://cis.ncu.edu.tw/iNCU/js/charts.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/jquery.circliful.min.js"></script>	<script src="https://cis.ncu.edu.tw/iNCU/js/choices.min.js"></script>
+
+</head>
+
+<body>
+	<style>
+    .loading-overlay {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        opacity: 0.5;
+        cursor: wait;
+    }
+
+    .loading-spinner-wrap {
+        position: fixed;
+        z-index: 1011;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        cursor: wait;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 6px solid #d9f2ff;
+        border-top: 6px solid #00b2ff;
+        border-radius: 50%;
+        animation: loading-spin 0.8s linear infinite;
+    }
+
+    @keyframes loading-spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
+<script>
+    function showLoading() {
+        // 避免重複產生
+        if (document.getElementById('loadingOverlay')) {
+            return;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'loadingOverlay';
+        overlay.className = 'loading-overlay';
+
+        const spinnerWrap = document.createElement('div');
+        spinnerWrap.id = 'loadingSpinner';
+        spinnerWrap.className = 'loading-spinner-wrap';
+
+        const spinner = document.createElement('div');
+        spinner.className = 'loading-spinner';
+
+        spinnerWrap.appendChild(spinner);
+
+        document.body.appendChild(overlay);
+        document.body.appendChild(spinnerWrap);
+    }
+
+    function hideLoading() {
+        const overlay = document.getElementById('loadingOverlay');
+        const spinner = document.getElementById('loadingSpinner');
+
+        if (overlay) {
+            overlay.remove();
+        }
+
+        if (spinner) {
+            spinner.remove();
+        }
+    }
+</script>	
+		<div>
+		<style>
+	.title-sub {		
+		display: none;
+	}
+	
+	@media(max-width: 768px) {
+		.title-text {		
+			display: none;
+		}
+		.title-sub {		
+			display: inline;
+		}
+	}
+</style>
+<div class="header-bg-img">
+	<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="d-flex align-items-center">
+			<img src="https://cis.ncu.edu.tw/iNCU/images/favicon.png" class="float-left me-2" alt="" style="height:40px;" />&nbsp;
+			<a class="navbar-brand" href="https://cis.ncu.edu.tw/iNCU/home">
+				<span class="title-text text_black">
+					國立中央大學 - 服務櫃台 (iNCU)
+									</span>
+
+				<span class="title-sub text_black">
+					服務櫃台 (iNCU)
+									</span>
+			</a>
+		</div>
+		<button class="navbar-toggler ml-auto" type="button" data-bs-toggle="collapse" data-bs-target=".navbars-ul" aria-controls="navbars-ul" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		
+		<div class="collapse navbar-collapse navbars-ul" id="navMenuSub">
+			<ul class="navbar-nav ms-auto">
+											    
+			    			    <li class="nav-item dropdown">
+			    	<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" style="color:black;">
+						<i class="bi bi-globe icon_text_spacing me-1"></i>中文
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/tw">中文</a>
+						 
+							<a class="dropdown-item" href="https://cis.ncu.edu.tw/iNCU/locale/en">English</a>
+											</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+		<nav class="navbar navbar-expand-md navbar-light pl-4">
+		<div class="collapse navbar-collapse navbars-ul" id="navMenu">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item dropdown active">
+<a class="nav-link dropdown-toggle" href="#" id="menu_publicService" role="button" data-bs-toggle="dropdown" aria-expanded="false">公開服務</a>
+<ul class="dropdown-menu" aria-labelledby="menu_publicService">
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/calenderQuery" class="dropdown-item">行事曆總覽</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/announcementQuery" class="dropdown-item">電子佈告欄</a>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/newStudentNoQuery" class="dropdown-item">新生學號查詢</a>
+</li>
+<li class="nav-item active">
+<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="dropdown-item">活動報名系統</a>
+</li>
+</ul>
+</li>
+<li class="nav-item">
+<a href="https://cis.ncu.edu.tw/iNCU/login" class="nav-link">登入</a>
+</li>
+
+			</ul>
+		</div>
+
+				
+			</nav>
+</div>
+
+<script>
+	$(".logoutTag").click(function(e){
+		if(!confirm("是否確定登出本系統？\n本系統登出後將導頁至Portal。\n")){
+			e.preventDefault();
+		}
+	});
+</script>	</div>
+	
+	<div class="container-fluid mainContent" style="margin-top:20px;">
+		<div class="contents">			
+			<div>
+								
+				<nav aria-label="breadcrumb">		
+					<i class="bi bi-house-door-fill"></i> 
+					<i class="bi bi-chevron-double-right"></i> 			
+  					<span class='text-info'>公開服務</span> <i class="bi bi-chevron-double-right"></i> <span class='text-info'>活動報名系統</span> <i class="bi bi-chevron-double-right"></i> 
+				</nav>
+	 
+				<br />
+								<h1>
+					<span class="font_fit">活動報名系統-</span>
+				</h1>				
+			</div>
+						<style>
+	.title_align{
+		text-align:left;
+	}
+
+	.event-list-title {
+		display: none;
+	}
+	@media (max-width: 575px) {
+		.title_align{
+			text-align:left;
+		}
+	}
+
+	@media (max-width: 767px) {
+		.event-list-title {
+			display: block;
+			padding: .3rem;
+			text-align: center;
+			background-color: var(--main-color-table);
+			margin-bottom: 1px;
+			border-top-left-radius: .5rem;
+			border-top-right-radius: .5rem;
+			font-weight: bold;
+		}
+		#myTab {
+			max-height: 160px;
+			overflow-x: auto;
+			padding: 0;
+			margin-bottom: 5px;
+			border-bottom: 3px solid var(--main-color-table);
+		}
+		#myTab > li {
+			padding: 0;
+		}
+		#myTab > li > a {
+			border-radius: 0;
+			border: 1px solid var(--main-color);
+		}
+		.tooltip {
+			display: none;
+		}
+		h1 {		
+			color: #007bff;			
+			padding-left:1px;			
+			background-image: unset;
+			width: auto;				
+		}
+		.nav-tabs .nav-item {
+			width: 100%;
+		}
+	}
+
+	/* tab較長的文字會…取代*/
+	#myTab .nav-link {
+		display: inline-block; 
+		max-width: 160px;
+		width: 160px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		vertical-align: middle;
+	}
+
+	@media (max-width: 767px) {
+		#myTab .nav-link {
+			display: block;
+			width: 100%;
+			max-width: none;
+			white-space: normal;
+			overflow: visible; 
+			text-overflow: unset; 
+		}
+	}
+
+</style>
+
+<div class="text-center" style="margin-bottom:10px;">
+	<a href="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery" class="btn btn-primary">
+		<i class="bi bi-back"></i>
+		回上一頁	</a>
+</div>
+
+<div id="errorMsg" class="text-info text-center">
+	
+</div>
+
+	<div class="container">
+		<img src="https://cis.ncu.edu.tw/iNCU/publicService/activityQuery/showImage/pp9-fIeGqqN5mZ6dzMKh" class="mx-auto d-block" style="max-height:800px; max-width:100%;" />
+		<hr />
+	</div>
+
+<div class="container" style="overflow-wrap: break-word; word-break: break-word;">
+	<dl class="row">
+		<dt class="col-sm-2">活動名稱</dt>
+		<dd class="col-sm-10">☀️【2026年11月】一對一業師諮詢</dd>
+
+		<dt class="col-sm-2">承辦單位</dt>
+		<dd class="col-sm-10">學生事務處職涯發展中心</dd>
+
+		<dt class="col-sm-2">承辦人</dt>
+		<dd class="col-sm-10">陳宜汶</dd>
+
+		
+		<dt class="col-sm-2">承辦人e-mail</dt>
+		<dd class="col-sm-10">ywchen2025@cc.ncu.edu.tw</dd>
+
+		<dt class="col-sm-2">參與對象</dt>
+		<dd class="col-sm-10">
+			
+						
+									<div>
+						<label>學生：</label>
+													<span>【全部學生】</span>
+							
+					</div>
+							
+			
+		</dd>
+
+		<dt class="col-sm-2">活動內容</dt>
+		<dd class="col-sm-10"></dd>
+
+		<dd class="col-sm-12">
+			<hr />
+			<p><span style="font-family: 'comic sans ms', sans-serif;"><strong><span style="font-size: 14pt; background-color: #f1c40f;">活動介紹</span></strong></span></p>
+<p>每年 3 至 6 月及 9 至 12 月辦理職涯諮詢服務，邀請具業界實務經驗或職涯相關專業證照之專家擔任業師，提供學生一對一職涯諮詢，協助進行職涯規劃、解答職涯相關問題，提升職場適應力。</p>
+<p>諮詢主題涵蓋職涯探索與方向規劃、中英文履歷撰寫指導與修改、面試技巧演練、產業趨勢分析、創新創業諮詢、個人優勢分析、職場人際關係及跨文化溝通、海外求職諮詢、實習規劃與申請準備等。</p>
+<p><span style="text-decoration: underline;"><a href="https://careercenter.ncu.edu.tw/article/%E4%B8%80%E5%B0%8D%E4%B8%80%E6%A5%AD%E5%B8%AB%E8%AB%AE%E8%A9%A2" target="_blank" rel="noopener noreferrer"><span style="font-family: comic sans ms, sans-serif;">職涯中心業師群介紹</span></a></span></p>
+<p><span style="font-family: 'comic sans ms', sans-serif;"><strong><span style="font-size: 14pt; background-color: #f1c40f;">活動資訊</span></strong></span></p>
+<p><span style="font-family: 'comic sans ms', sans-serif; color: #000000;">時間：2026年11月9日及11月11日，</span><span style="font-family: 'comic sans ms', sans-serif; color: #000000;">時段依實際規劃之場次為主。</span></p>
+<p><span style="font-family: 'comic sans ms', sans-serif; color: #000000;">地點：職涯發展中心諮詢室。</span></p>
+<p><span style="font-family: 'comic sans ms', sans-serif; color: #000000;">參與對象：本校在學學生。</span></p>
+<p style="font-weight: bold;"><span style="font-family: 'comic sans ms', sans-serif;">※本活動適用於<span style="color: #2028ef;">安心就學支持計畫-職涯助學金</span><span style="color: #000000;">，如符合該身分者，請於諮詢結束後主動與承辦人領取貼紙一張</span>。</span></p>
+<p style="font-weight: bold;"><span style="font-family: 'comic sans ms', sans-serif;">※全程<span style="color: #2028ef;">完整參與</span>並於諮詢結束後<span style="color: #2028ef;">填寫諮詢滿意度問卷</span>者，核發<span style="color: #2028ef;">服務學習時數：生活知能-自我探索與生涯規劃 1 小時</span>。</span></p>
+<p><span style="color: #000000; font-family: 'comic sans ms', sans-serif; background-color: #f1c40f; font-size: 14pt;"><strong>諮詢注意事項：</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>1. 每人每月限參與1場，一學期至多2場。</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>2. 諮詢問題為必填項目，若填寫「無問題」或其他同義詞句，將直接取消報名，恕不另行通知。</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>3. <span style="color: #e03e2d;">若有履歷、自傳修改或模擬面試等相關諮詢問題者，報名時請務必上傳履歷</span>，以利業師事前了解您的需求。</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>4. 參與活動的「您」代表中央大學的每一份子，請務必注意自己對諮詢師的禮儀。</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>5. <span style="color: #e03e2d;">本活動相關通知及聯繫事項將優先以 Email 寄送，請同學務必留意信箱。Email 為同學於 Portal 設定之個人信箱，可至「Portal ＞ 服務櫃台 ＞ 基本資料與權限 ＞ 個人信箱設定」確認。</span></strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>6. 諮詢當日請務必準時參加，若無故未出席，將依本中心相關規定辦理。</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>7. </strong></span><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>報名時間結束後，若要取消報名，請寫信至 <span style="text-decoration: underline; color: #3598db;">ywchen2025@g.ncu.edu.tw</span> 告知承辦人並說明事由。</strong></span></p>
+<p><span style="color: #236fa1; font-family: 'comic sans ms', sans-serif;"><strong>8. <span style="font-size: 12pt;"><span style="color: #e03e2d;">若同學報名後無法參與，</span><span style="font-family: 'comic sans ms', sans-serif;"><span style="color: #e03e2d;">請最晚於10/16前自行取消報名，若未於上述期限內取消且未出席者，將累積「未出席紀錄1次」，若達3次（含）以上，將影響其未來參與職涯中心主辦活動及抽獎權益。</span></span><span style="font-family: 'comic sans ms', sans-serif;">(註：敬請詳閱中心111年4月18日</span><a href="https://www.facebook.com/ncucc/posts/5196550217035022" target="_blank" rel="noopener noreferrer">公告</a><span style="font-family: 'comic sans ms', sans-serif;">，以確保自身權益，謝謝！)</span>。</span></strong></span></p>
+		</dd>
+		
+	</dl>
+</div>
+<div class="container">
+	<div class="event-list-title">場次列表</div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate active" id=tabEvent115A01747 data-bs-toggle="tab" data-tooltip="tooltip" title="游家瑋 11/9(一) 10:00-11:00" href=#event115A01747 role="tab" aria-controls=event115A01747 aria-selected="true">
+						游家瑋 11/9(一) 10:00-11:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01748 data-bs-toggle="tab" data-tooltip="tooltip" title="游家瑋 11/9(一) 11:00-12:00" href=#event115A01748 role="tab" aria-controls=event115A01748 aria-selected="true">
+						游家瑋 11/9(一) 11:00-12:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01749 data-bs-toggle="tab" data-tooltip="tooltip" title="游家瑋 11/9(一) 13:00-14:00" href=#event115A01749 role="tab" aria-controls=event115A01749 aria-selected="true">
+						游家瑋 11/9(一) 13:00-14:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01750 data-bs-toggle="tab" data-tooltip="tooltip" title="游家瑋 11/9(一) 14:00-15:00" href=#event115A01750 role="tab" aria-controls=event115A01750 aria-selected="true">
+						游家瑋 11/9(一) 14:00-15:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01751 data-bs-toggle="tab" data-tooltip="tooltip" title="游家瑋 11/9(一) 15:00-16:00" href=#event115A01751 role="tab" aria-controls=event115A01751 aria-selected="true">
+						游家瑋 11/9(一) 15:00-16:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01752 data-bs-toggle="tab" data-tooltip="tooltip" title="游家瑋 11/9(一) 16:00-17:00" href=#event115A01752 role="tab" aria-controls=event115A01752 aria-selected="true">
+						游家瑋 11/9(一) 16:00-17:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01754 data-bs-toggle="tab" data-tooltip="tooltip" title="鄭詩穎 11/11(三) 11:00-12:00" href=#event115A01754 role="tab" aria-controls=event115A01754 aria-selected="true">
+						鄭詩穎 11/11(三) 11:00-12:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01755 data-bs-toggle="tab" data-tooltip="tooltip" title="鄭詩穎 11/11(三) 13:00-14:00" href=#event115A01755 role="tab" aria-controls=event115A01755 aria-selected="true">
+						鄭詩穎 11/11(三) 13:00-14:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01756 data-bs-toggle="tab" data-tooltip="tooltip" title="鄭詩穎 11/11(三) 14:00-15:00" href=#event115A01756 role="tab" aria-controls=event115A01756 aria-selected="true">
+						鄭詩穎 11/11(三) 14:00-15:00
+					</a>
+				</li>
+							<li class="nav-item flex-column flex-md-row">
+					<a class="nav-link text-truncate " id=tabEvent115A01757 data-bs-toggle="tab" data-tooltip="tooltip" title="鄭詩穎 11/11(三) 15:00-16:00" href=#event115A01757 role="tab" aria-controls=event115A01757 aria-selected="true">
+						鄭詩穎 11/11(三) 15:00-16:00
+					</a>
+				</li>
+						</ul>
+	<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id=event115A01747 role="tabpanel" aria-labelledby=tabEvent115A01747>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">游家瑋 11/9(一) 10:00-11:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	游家瑋<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-09 10:00 ~ 2026-11-09 11:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>競爭LEAD教育中心共同創辦人<br>大誠保險經紀人專任講師<br>勞動力發展署專任講師<br>銘傳大學產學暨推廣處專任講師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>培訓企業單位：統一企業股份有限公司、聯合利華股份有限公司、台灣紐巴倫股份有限公司、花仙子企業股份有限公司、東唐建設有限公司、南山人壽、國泰人壽、台灣人壽、長頸鹿美語…等<br><br>培訓政府單位：中華民國紅十字會、 臺北市公共運輸處、桃園少觀所、大園農會、台北志工中心、公務人力發展中心、乘風少年學院 …等</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>擅長從生涯到職涯的完整規劃，給予資源及工具幫助你重新檢視自我，探索屬於你的人生。如果你對於未來感到迷惘都歡迎來聊聊！</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人生涯規劃與發展</span><br><span style="font-size: 12pt;">個人職涯規劃與發展</span><br><span style="font-size: 12pt;">中文履歷寫作指導及修改</span><br><span style="font-size: 12pt;">求職面試及自我行銷技巧</span><br><span style="font-size: 12pt;">提案簡報及公眾表達技巧</span><br><span style="font-size: 12pt;">領導統御與組織管理</span><br><span style="font-size: 12pt;">提案企劃撰寫技巧</span><br><span style="font-size: 12pt;">轉系諮詢</span></span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01748 role="tabpanel" aria-labelledby=tabEvent115A01748>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">游家瑋 11/9(一) 11:00-12:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	游家瑋<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-09 11:00 ~ 2026-11-09 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>競爭LEAD教育中心共同創辦人<br>大誠保險經紀人專任講師<br>勞動力發展署專任講師<br>銘傳大學產學暨推廣處專任講師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>培訓企業單位：統一企業股份有限公司、聯合利華股份有限公司、台灣紐巴倫股份有限公司、花仙子企業股份有限公司、東唐建設有限公司、南山人壽、國泰人壽、台灣人壽、長頸鹿美語…等<br><br>培訓政府單位：中華民國紅十字會、 臺北市公共運輸處、桃園少觀所、大園農會、台北志工中心、公務人力發展中心、乘風少年學院 …等</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>擅長從生涯到職涯的完整規劃，給予資源及工具幫助你重新檢視自我，探索屬於你的人生。如果你對於未來感到迷惘都歡迎來聊聊！</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人生涯規劃與發展</span><br><span style="font-size: 12pt;">個人職涯規劃與發展</span><br><span style="font-size: 12pt;">中文履歷寫作指導及修改</span><br><span style="font-size: 12pt;">求職面試及自我行銷技巧</span><br><span style="font-size: 12pt;">提案簡報及公眾表達技巧</span><br><span style="font-size: 12pt;">領導統御與組織管理</span><br><span style="font-size: 12pt;">提案企劃撰寫技巧</span><br><span style="font-size: 12pt;">轉系諮詢</span></span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01749 role="tabpanel" aria-labelledby=tabEvent115A01749>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">游家瑋 11/9(一) 13:00-14:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	游家瑋<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-09 13:00 ~ 2026-11-09 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>競爭LEAD教育中心共同創辦人<br>大誠保險經紀人專任講師<br>勞動力發展署專任講師<br>銘傳大學產學暨推廣處專任講師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>培訓企業單位：統一企業股份有限公司、聯合利華股份有限公司、台灣紐巴倫股份有限公司、花仙子企業股份有限公司、東唐建設有限公司、南山人壽、國泰人壽、台灣人壽、長頸鹿美語…等<br><br>培訓政府單位：中華民國紅十字會、 臺北市公共運輸處、桃園少觀所、大園農會、台北志工中心、公務人力發展中心、乘風少年學院 …等</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>擅長從生涯到職涯的完整規劃，給予資源及工具幫助你重新檢視自我，探索屬於你的人生。如果你對於未來感到迷惘都歡迎來聊聊！</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人生涯規劃與發展</span><br><span style="font-size: 12pt;">個人職涯規劃與發展</span><br><span style="font-size: 12pt;">中文履歷寫作指導及修改</span><br><span style="font-size: 12pt;">求職面試及自我行銷技巧</span><br><span style="font-size: 12pt;">提案簡報及公眾表達技巧</span><br><span style="font-size: 12pt;">領導統御與組織管理</span><br><span style="font-size: 12pt;">提案企劃撰寫技巧</span><br><span style="font-size: 12pt;">轉系諮詢</span></span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01750 role="tabpanel" aria-labelledby=tabEvent115A01750>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">游家瑋 11/9(一) 14:00-15:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	游家瑋<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-09 14:00 ~ 2026-11-09 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>競爭LEAD教育中心共同創辦人<br>大誠保險經紀人專任講師<br>勞動力發展署專任講師<br>銘傳大學產學暨推廣處專任講師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>培訓企業單位：統一企業股份有限公司、聯合利華股份有限公司、台灣紐巴倫股份有限公司、花仙子企業股份有限公司、東唐建設有限公司、南山人壽、國泰人壽、台灣人壽、長頸鹿美語…等<br><br>培訓政府單位：中華民國紅十字會、 臺北市公共運輸處、桃園少觀所、大園農會、台北志工中心、公務人力發展中心、乘風少年學院 …等</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>擅長從生涯到職涯的完整規劃，給予資源及工具幫助你重新檢視自我，探索屬於你的人生。如果你對於未來感到迷惘都歡迎來聊聊！</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人生涯規劃與發展</span><br><span style="font-size: 12pt;">個人職涯規劃與發展</span><br><span style="font-size: 12pt;">中文履歷寫作指導及修改</span><br><span style="font-size: 12pt;">求職面試及自我行銷技巧</span><br><span style="font-size: 12pt;">提案簡報及公眾表達技巧</span><br><span style="font-size: 12pt;">領導統御與組織管理</span><br><span style="font-size: 12pt;">提案企劃撰寫技巧</span><br><span style="font-size: 12pt;">轉系諮詢</span></span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01751 role="tabpanel" aria-labelledby=tabEvent115A01751>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">游家瑋 11/9(一) 15:00-16:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	游家瑋<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-09 15:00 ~ 2026-11-09 16:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>競爭LEAD教育中心共同創辦人<br>大誠保險經紀人專任講師<br>勞動力發展署專任講師<br>銘傳大學產學暨推廣處專任講師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>培訓企業單位：統一企業股份有限公司、聯合利華股份有限公司、台灣紐巴倫股份有限公司、花仙子企業股份有限公司、東唐建設有限公司、南山人壽、國泰人壽、台灣人壽、長頸鹿美語…等<br><br>培訓政府單位：中華民國紅十字會、 臺北市公共運輸處、桃園少觀所、大園農會、台北志工中心、公務人力發展中心、乘風少年學院 …等</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>擅長從生涯到職涯的完整規劃，給予資源及工具幫助你重新檢視自我，探索屬於你的人生。如果你對於未來感到迷惘都歡迎來聊聊！</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人生涯規劃與發展</span><br><span style="font-size: 12pt;">個人職涯規劃與發展</span><br><span style="font-size: 12pt;">中文履歷寫作指導及修改</span><br><span style="font-size: 12pt;">求職面試及自我行銷技巧</span><br><span style="font-size: 12pt;">提案簡報及公眾表達技巧</span><br><span style="font-size: 12pt;">領導統御與組織管理</span><br><span style="font-size: 12pt;">提案企劃撰寫技巧</span><br><span style="font-size: 12pt;">轉系諮詢</span></span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01752 role="tabpanel" aria-labelledby=tabEvent115A01752>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">游家瑋 11/9(一) 16:00-17:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	游家瑋<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-09 16:00 ~ 2026-11-09 17:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>競爭LEAD教育中心共同創辦人<br>大誠保險經紀人專任講師<br>勞動力發展署專任講師<br>銘傳大學產學暨推廣處專任講師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>培訓企業單位：統一企業股份有限公司、聯合利華股份有限公司、台灣紐巴倫股份有限公司、花仙子企業股份有限公司、東唐建設有限公司、南山人壽、國泰人壽、台灣人壽、長頸鹿美語…等<br><br>培訓政府單位：中華民國紅十字會、 臺北市公共運輸處、桃園少觀所、大園農會、台北志工中心、公務人力發展中心、乘風少年學院 …等</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>擅長從生涯到職涯的完整規劃，給予資源及工具幫助你重新檢視自我，探索屬於你的人生。如果你對於未來感到迷惘都歡迎來聊聊！</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人生涯規劃與發展</span><br><span style="font-size: 12pt;">個人職涯規劃與發展</span><br><span style="font-size: 12pt;">中文履歷寫作指導及修改</span><br><span style="font-size: 12pt;">求職面試及自我行銷技巧</span><br><span style="font-size: 12pt;">提案簡報及公眾表達技巧</span><br><span style="font-size: 12pt;">領導統御與組織管理</span><br><span style="font-size: 12pt;">提案企劃撰寫技巧</span><br><span style="font-size: 12pt;">轉系諮詢</span></span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01754 role="tabpanel" aria-labelledby=tabEvent115A01754>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">鄭詩穎 11/11(三) 11:00-12:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	鄭詩穎<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-11 11:00 ~ 2026-11-11 12:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>學習日創辦人暨職涯發展教練</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>淡江大學教育科技所<br>台東大學(台東師範學院)初等教育系<br>淡江大學教育科技系兼任講師<br>國泰飯店觀光事業 人才發展經理<br>信義房屋 人力資源部職能發展組主任<br>饗賓餐飲股份有限公司教育訓練主任<br>亞碩國際管理顧問公司 業務經理暨助理顧問<br>勝典科技 數位教材開發專案經理暨教學設計師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----資格----</span></strong></span></p>
+<p><span style="color: #000000; font-size: 12pt;">日本產訓協會主管管理才能講師認證 Management Training Program Instructor (MTP-I)<br>美國 NCC 全球職涯發展師 Global Career Development Facilitator<br>生涯指引 Career Director 顧問</span></p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>不限領域</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong></span><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人職涯探索及規劃<br>中文履歷寫作指導及修改<br>英文履歷寫作指導及修改<br>面試技巧及自我行銷演練<br>產業趨勢發展<br>創新創業諮詢<br>適才適所解析<br>人際關係及跨文化溝通<br>轉系諮詢<br>研究所生涯規劃<br>海外派駐或出差狀況<br>個人發展計畫與學習諮詢</span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01755 role="tabpanel" aria-labelledby=tabEvent115A01755>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">鄭詩穎 11/11(三) 13:00-14:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	鄭詩穎<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-11 13:00 ~ 2026-11-11 14:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>學習日創辦人暨職涯發展教練</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>淡江大學教育科技所<br>台東大學(台東師範學院)初等教育系<br>淡江大學教育科技系兼任講師<br>國泰飯店觀光事業 人才發展經理<br>信義房屋 人力資源部職能發展組主任<br>饗賓餐飲股份有限公司教育訓練主任<br>亞碩國際管理顧問公司 業務經理暨助理顧問<br>勝典科技 數位教材開發專案經理暨教學設計師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----資格----</span></strong></span></p>
+<p><span style="color: #000000; font-size: 12pt;">日本產訓協會主管管理才能講師認證 Management Training Program Instructor (MTP-I)<br>美國 NCC 全球職涯發展師 Global Career Development Facilitator<br>生涯指引 Career Director 顧問</span></p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>不限領域</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong></span><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人職涯探索及規劃<br>中文履歷寫作指導及修改<br>英文履歷寫作指導及修改<br>面試技巧及自我行銷演練<br>產業趨勢發展<br>創新創業諮詢<br>適才適所解析<br>人際關係及跨文化溝通<br>轉系諮詢<br>研究所生涯規劃<br>海外派駐或出差狀況<br>個人發展計畫與學習諮詢</span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01756 role="tabpanel" aria-labelledby=tabEvent115A01756>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">鄭詩穎 11/11(三) 14:00-15:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	鄭詩穎<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-11 14:00 ~ 2026-11-11 15:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>學習日創辦人暨職涯發展教練</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>淡江大學教育科技所<br>台東大學(台東師範學院)初等教育系<br>淡江大學教育科技系兼任講師<br>國泰飯店觀光事業 人才發展經理<br>信義房屋 人力資源部職能發展組主任<br>饗賓餐飲股份有限公司教育訓練主任<br>亞碩國際管理顧問公司 業務經理暨助理顧問<br>勝典科技 數位教材開發專案經理暨教學設計師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----資格----</span></strong></span></p>
+<p><span style="color: #000000; font-size: 12pt;">日本產訓協會主管管理才能講師認證 Management Training Program Instructor (MTP-I)<br>美國 NCC 全球職涯發展師 Global Career Development Facilitator<br>生涯指引 Career Director 顧問</span></p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>不限領域</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong></span><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人職涯探索及規劃<br>中文履歷寫作指導及修改<br>英文履歷寫作指導及修改<br>面試技巧及自我行銷演練<br>產業趨勢發展<br>創新創業諮詢<br>適才適所解析<br>人際關係及跨文化溝通<br>轉系諮詢<br>研究所生涯規劃<br>海外派駐或出差狀況<br>個人發展計畫與學習諮詢</span></span></p>
+						</dd>
+					</dl>
+				</div>
+							<div class="tab-pane fade show " id=event115A01757 role="tabpanel" aria-labelledby=tabEvent115A01757>
+					<div class="d-block d-sm-inline-block float-end">
+													<div class="text-info text-center">
+								<br/>
+																	<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg d-none d-sm-block">登入</a>
+									<a href="https://cis.ncu.edu.tw/iNCU/login" type="button" class="btn btn-primary btn-lg btn-block d-block d-sm-none" style="display:block">登入</a>	
+											
+							</div>
+							
+						<p class="text-info text-center">
+															報名人數：0 / 1<br />
+								備取人數：0 / 0
+													</p>
+					</div>
+					<dl class="row">
+						<dt style="word-wrap:break-word" class="col-sm-12">
+							<h3 class="">鄭詩穎 11/11(三) 15:00-16:00</h3>
+						</dt>
+													<dt class="col-sm-3 title_align">講師</dt>
+							<dd class="col-sm-9">
+																	鄭詩穎<br />
+															</dd>
+						
+						<dt class="col-sm-3 title_align">地點</dt>
+						<dd class="col-sm-9 text-break" >職涯發展中心(中正圖書館2F)</dd>
+
+						<dt class="col-sm-3 title_align">報名時間</dt>
+						<dd class="col-sm-9">2026-09-28 09:00 ~ 2026-10-16 17:00</dd>
+
+						<dt class="col-sm-3 title_align">場次時間</dt>
+						<dd class="col-sm-9">2026-11-11 15:00 ~ 2026-11-11 16:00</dd>
+
+						<dt class="col-sm-3 title_align">報名人數上限</dt>
+						<dd class="col-sm-9">1</dd>
+
+						<dt class="col-sm-3 title_align">備取人數上限</dt>
+						<dd class="col-sm-9">0</dd>
+
+						<dt class="col-sm-3 title_align">時數標籤</dt>
+						<dd class="col-sm-9">
+															職涯發展:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+																					</dd>
+													<dt class="col-sm-3 title_align">學習護照時數標籤</dt>
+							<dd class="col-sm-9">
+								自我探索與生涯規劃:1小時
+								 
+									<span class='text-danger'>(※ 本場次可獲得時數, 以此顯示之時數標籤為主)</span>
+															</dd>
+						
+													<dt class="col-sm-3 title_align">學習護照認證條件</dt>
+							<dd class="col-sm-9">
+																	簽到、簽退、前測問卷、後測問卷
+															</dd>
+						
+													<dt class="col-sm-3 title_align">軟實力時數標籤</dt>
+							<dd class="col-sm-9">
+								問題解決 :  0.5小時、多元視野 :  0.5小時
+							</dd>
+												
+						<dd class="col-sm-12">
+							<hr />
+							<p><strong><span style="font-size: 14pt;">業師介紹</span></strong></p>
+<p><span style="font-size: 14pt;"><strong><span style="color: #236fa1;">----現職----</span></strong></span><br>學習日創辦人暨職涯發展教練</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----經歷----</span></strong></span><br>淡江大學教育科技所<br>台東大學(台東師範學院)初等教育系<br>淡江大學教育科技系兼任講師<br>國泰飯店觀光事業 人才發展經理<br>信義房屋 人力資源部職能發展組主任<br>饗賓餐飲股份有限公司教育訓練主任<br>亞碩國際管理顧問公司 業務經理暨助理顧問<br>勝典科技 數位教材開發專案經理暨教學設計師</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----資格----</span></strong></span></p>
+<p><span style="color: #000000; font-size: 12pt;">日本產訓協會主管管理才能講師認證 Management Training Program Instructor (MTP-I)<br>美國 NCC 全球職涯發展師 Global Career Development Facilitator<br>生涯指引 Career Director 顧問</span></p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢領域----</span></strong></span></p>
+<p>不限領域</p>
+<p><span style="color: #236fa1;"><strong><span style="font-size: 14pt;">----可諮詢主題----<br></span></strong></span><span style="font-size: 14pt; color: #000000;"><span style="font-size: 12pt;">個人職涯探索及規劃<br>中文履歷寫作指導及修改<br>英文履歷寫作指導及修改<br>面試技巧及自我行銷演練<br>產業趨勢發展<br>創新創業諮詢<br>適才適所解析<br>人際關係及跨文化溝通<br>轉系諮詢<br>研究所生涯規劃<br>海外派駐或出差狀況<br>個人發展計畫與學習諮詢</span></span></p>
+						</dd>
+					</dl>
+				</div>
+						</div>
+</div>
+
+<script>  
+	$(document ).ready(function() {
+		if(window.location.hash){
+			$(".nav-link").removeClass("active");
+			$(".tab-pane ").removeClass("active");
+			
+			var tab = $(window.location.hash).attr("aria-labelledby");
+			var loc = "#"+tab;
+			$(window.location.hash).tab("show");
+			$(loc).addClass("active");
+		}
+	});
+
+	$(document).on("click", ".cancelSignup", function(){
+		var msg	= "確定要取消報名?";
+
+		if(confirm(msg)){
+			$(this).closest("form").submit();
+		}
+	});
+
+	$('#myTab [data-tooltip]').tooltip({
+		template: '<div class="tooltip" role="tooltip"><div class="tooltip-inner"></div></div>',
+	});
+</script>
+ 	
+					  	<div class="gotop" title="回頂端">
+			   <i class="bi bi-caret-up-fill"></i>		  
+			</div>
+			
+			<div style="clear:both;"></div>
+		</div>
+	</div>
+	
+		<footer class="bg-light mt-4">
+		<div class="container">
+	<div class="copyright">
+		<p>
+			版號：d24512cf，建議瀏覽器：Chrome、Firefox等瀏覽器，或Edge以上。<br />
+			Copyright &copy; 2016 NCU.CC. All Rights Reserved
+					</p>
+	</div>
+</div>	</footer>	
+	
+	<script>
+		//===document.ready===(start)
+		$(document).ready(function() {
+			dressCSS(); //穿上全局CSS樣式	
+			getBlockUI(); //穿上blockUI自訂樣式
+			//@todo:FIXME 若要增加JS可加在tools.js或blankTools.js
+	    });
+		//===document.ready===(end)		
+		
+		//GoTop 按鈕事件
+		$(function() {
+		    /* 按下 GoTop 按鈕時的事件 */
+		    $('.gotop').click(function() {
+		        $('html,body').animate({ scrollTop: 0 }, 400); /* 返回到最頂上 */
+		        
+				return false;
+		    });
+		    /* 偵測卷軸滑動時，往下滑超過200px就讓GoTop按鈕出現 */
+		    $(window).scroll(function() {
+		        if ( $(this).scrollTop() >= 200){
+		            $('.gotop').show(10).animate({bottom:"30px"}, 10);
+		        } else {
+		            $('.gotop').animate({bottom:"-50px"}, 10);	
+		        }	              
+		    });
+		});
+		//H1標題超過長度字體變小
+		let fitHeight = parseInt($("h1").css("min-height"))/2,
+			titleHeight = $(".font_fit")[0].offsetHeight;		
+		if (titleHeight > fitHeight) {
+			$(".font_fit").addClass("font_auto_fit");
+		} else {
+			$(".font_fit").removeClass("font_auto_fit");
+		}
+	</script>
+</body>
+</html>
